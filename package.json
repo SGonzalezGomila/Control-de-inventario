@@ -1,0 +1,7 @@
+{
+  "name": "inventario-ws",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Inventario por WS con préstamos entre espacios",
+  "engines": { "node": ">=18" }
+}
