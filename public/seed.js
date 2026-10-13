@@ -1,5 +1,6 @@
-// Datos iniciales generados desde Inventario_por_WS_.xlsx
+// Datos iniciales tomados del Excel "Inventario por WS" (actualizado el 13/10/2026)
 (function (r) { if (typeof module === 'object' && module.exports) module.exports = r; else window.SEED = r; })({
+ "version": 3,
  "rev": 0,
  "spaces": [
   {
@@ -7,20 +8,18 @@
    "name": "WS 1 - Videojuegos",
    "owner": "",
    "checkedAt": "",
-   "labels": [
-    "Imprimir todas"
-   ],
+   "labels": [],
    "items": [
     {
      "category": "Tecnología",
      "name": "Cable HDMI / Cable Canal",
-     "qty": 0,
+     "qty": 1,
      "needsFix": true,
      "problem": "Cableado",
-     "comment": "",
+     "comment": "El cable HDMI que conecta la televisión con la computadora queda expuesto y colgando, lo que genera un aspecto visual desprolijo y además representa un posible riesgo de seguridad.",
+     "link": "",
      "id": "ws1-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -28,21 +27,21 @@
      "qty": 0,
      "needsFix": true,
      "problem": "Cableado",
-     "comment": "",
+     "comment": "El cable de alimentación de la computadora del profesor se encuentra conectado a un enchufe ubicado cerca de las computadoras de los estudiantes, lo que provoca que frecuentemente sea tocado o desconectado de manera accidental. Sería recomendable reubicar la conexión eléctrica o asegurarla para evitar interrupciones y mejorar la seguridad del espacio. Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "ws1-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Mouse Cable",
-     "qty": 19,
+     "qty": 18,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -51,9 +50,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -62,9 +61,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -73,20 +72,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Control",
-     "qty": 1,
+     "qty": 2,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -95,9 +94,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -106,9 +105,86 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws1-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Mouse Mac",
+     "qty": 2,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-10",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Mouse Verbatim (repuesto)",
+     "qty": 4,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-11",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Mouse Logitech (repuesto)",
+     "qty": 1,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-12",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Zapatilla",
+     "qty": 2,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-13",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Adaptores Mouse (En uso)",
+     "qty": 18,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-14",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Adaptores Mouse (Repuesto)",
+     "qty": 9,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-15",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "HDMI Multiport",
+     "qty": 1,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws1-16",
+     "missing": 0
     }
    ]
   },
@@ -126,9 +202,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -136,21 +212,21 @@
      "qty": 21,
      "needsFix": false,
      "problem": "",
-     "comment": "Etiquetas faltantes: 4. 1 Mouse roto",
+     "comment": "1 Mouse roto",
+     "link": "",
      "id": "ws2-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Teclados Mac",
-     "qty": 16,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "Falta 1 teclado/ durante el mes de octubre tendrán 3 teclados que pertenecen a WSH 1 (n°8,n°9 y n°10)",
+     "link": "",
      "id": "ws2-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -159,9 +235,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -170,9 +246,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -180,21 +256,21 @@
      "qty": 21,
      "needsFix": false,
      "problem": "",
-     "comment": "Etiquetas faltantes: 9. ",
+     "comment": "",
+     "link": "",
      "id": "ws2-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Lapiz Wacom",
-     "qty": 17,
+     "qty": 16,
      "needsFix": false,
      "problem": "",
-     "comment": "Falta 1 lapiz Wacom",
+     "comment": "",
+     "link": "",
      "id": "ws2-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -203,9 +279,9 @@
      "needsFix": true,
      "problem": "",
      "comment": "Son 3 tipos distitnos. Algunos adaptadores no funcionan muy bien, pero por ahora tenemos",
+     "link": "",
      "id": "ws2-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -214,9 +290,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -225,9 +301,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -236,9 +312,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "FALTAN cables. Esto ya se sabe hace tiempo, nunca los tuvimos y no sabemos donde estan. Es un problema porque para nivel 2 necesitamos usar las tables por cable (funcionan mal por bluetooth). En su momento Cande/Mili las habian buscando en deposito y tampoco estaban.",
+     "link": "",
      "id": "ws2-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -247,9 +323,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -258,9 +334,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -269,9 +345,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -280,9 +356,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -291,9 +367,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -302,9 +378,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -313,9 +389,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-18",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -324,9 +400,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-19",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -335,9 +411,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-20",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -346,9 +422,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-21",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -357,17 +433,17 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws2-22",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   },
   {
    "id": "ws3",
    "name": "WS 3 - Música",
-   "owner": "Matias",
-   "checkedAt": "30/04",
+   "owner": "Paloma",
+   "checkedAt": "10/09/2026",
    "labels": [],
    "items": [
     {
@@ -377,9 +453,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -388,9 +464,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -399,9 +475,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -410,9 +486,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -421,9 +497,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -432,9 +508,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -443,9 +519,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -454,20 +530,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Auriculares",
      "qty": 21,
      "needsFix": true,
-     "problem": "2 están rotos",
+     "problem": "4 están rotos",
      "comment": "",
+     "link": "",
      "id": "ws3-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -476,31 +552,31 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Adaptadores usb a usb c",
-     "qty": 18,
-     "needsFix": true,
-     "problem": "Falta 1",
+     "qty": 19,
+     "needsFix": false,
+     "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Cables usb c",
-     "qty": 5,
+     "qty": 6,
      "needsFix": true,
-     "problem": "Faltan 14",
+     "problem": "Faltan 13",
      "comment": "",
+     "link": "",
      "id": "ws3-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -509,31 +585,31 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Computadoras",
      "qty": 19,
      "needsFix": false,
-     "problem": "",
+     "problem": "La nro 8 tiene fallas en la pantalla",
      "comment": "",
+     "link": "",
      "id": "ws3-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Teclados",
-     "qty": 19,
+     "qty": 18,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Hay 1 en reparación",
+     "link": "",
      "id": "ws3-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -542,9 +618,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -553,9 +629,9 @@
      "needsFix": true,
      "problem": "No hay",
      "comment": "",
+     "link": "",
      "id": "ws3-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -564,9 +640,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-18",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -575,31 +651,31 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-19",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
      "name": "Borrador",
      "qty": 0,
-     "needsFix": true,
-     "problem": "No hay",
+     "needsFix": false,
+     "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws3-20",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
      "name": "Marcadores",
      "qty": 0,
      "needsFix": true,
-     "problem": "No hay",
-     "comment": "",
+     "problem": "",
+     "comment": "Tenemos 3",
+     "link": "",
      "id": "ws3-21",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -607,34 +683,30 @@
      "qty": 0,
      "needsFix": true,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "ws3-22",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   },
   {
    "id": "ws4",
    "name": "WS 4 - Programación",
-   "owner": "Santiago",
-   "checkedAt": "05/04/2026",
-   "labels": [
-    "WSH 4 19  iMac",
-    "WSH 4 19  Teclado",
-    "WSH 4 19  Mouse"
-   ],
+   "owner": "Guido",
+   "checkedAt": "10/09/2026",
+   "labels": [],
    "items": [
     {
      "category": "Tecnología",
      "name": "I Mac",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -643,9 +715,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -654,20 +726,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Teclado",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -676,20 +748,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Mouse",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -698,20 +770,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
      "name": "Escritorios",
-     "qty": 8,
+     "qty": 9,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -720,9 +792,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -731,31 +803,31 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
      "name": "Cortina Roller",
-     "qty": 3,
+     "qty": 2,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
      "name": "Fibrones",
-     "qty": 3,
+     "qty": 8,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -764,9 +836,31 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws4-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
+    },
+    {
+     "category": "Librería",
+     "name": "Borradores",
+     "qty": 2,
+     "needsFix": true,
+     "problem": "Los dos están rotos",
+     "comment": "",
+     "link": "",
+     "id": "ws4-14",
+     "missing": 0
+    },
+    {
+     "category": "Otros",
+     "name": "Pads",
+     "qty": 18,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws4-15",
+     "missing": 0
     }
    ]
   },
@@ -775,10 +869,7 @@
    "name": "WS 5 - Diseño Gráfico",
    "owner": "Mariano",
    "checkedAt": "28/04/2026",
-   "labels": [
-    "Mouses: 2 - 9 - 10 - 11 - 12",
-    "Teclados: Ninguno"
-   ],
+   "labels": [],
    "items": [
     {
      "category": "Tecnología",
@@ -786,10 +877,10 @@
      "qty": 2,
      "needsFix": true,
      "problem": "Solo funciona una",
-     "comment": "",
+     "comment": "Prende y apaga todo sin poder elegir entre los tubos centrales o los de los costados",
+     "link": "",
      "id": "ws5-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -798,42 +889,42 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Monitores",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Teclados",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Mouses",
-     "qty": 17,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -842,9 +933,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -853,9 +944,9 @@
      "needsFix": false,
      "problem": "No tenemos",
      "comment": "",
+     "link": "",
      "id": "ws5-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -864,9 +955,9 @@
      "needsFix": false,
      "problem": "No tenemos",
      "comment": "",
+     "link": "",
      "id": "ws5-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -875,9 +966,9 @@
      "needsFix": false,
      "problem": "Necesitamos mínimo 17",
      "comment": "",
+     "link": "",
      "id": "ws5-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -886,9 +977,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -897,9 +988,9 @@
      "needsFix": false,
      "problem": "Necesitamos mínimo 6",
      "comment": "",
+     "link": "",
      "id": "ws5-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -908,9 +999,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -919,9 +1010,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -929,10 +1020,10 @@
      "qty": 1,
      "needsFix": true,
      "problem": "Falta la cortina grande",
-     "comment": "",
+     "comment": "Falta desde el año pasado, que se rompió el sostén y nunca se reparó.",
+     "link": "",
      "id": "ws5-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -941,9 +1032,9 @@
      "needsFix": true,
      "problem": "De 4 no funciona la palanca de altura",
      "comment": "",
+     "link": "",
      "id": "ws5-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -952,9 +1043,9 @@
      "needsFix": true,
      "problem": "Baja sola",
      "comment": "",
+     "link": "",
      "id": "ws5-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -963,9 +1054,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -974,9 +1065,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-18",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -985,9 +1076,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws5-19",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   },
@@ -995,17 +1086,8 @@
    "id": "ws6",
    "name": "WS 6 - Animación",
    "owner": "Olivia",
-   "checkedAt": "24/8/2025",
-   "labels": [
-    "WSH 6 2  mouse",
-    "WSH 6 7  mouse",
-    "WSH 6 8  teclado",
-    "WSH 6 8  mouse",
-    "WSH 6 13  compu",
-    "WSH 6 16  mouse",
-    "WSH 6 17  teclado",
-    "también hay que imprimir todas las etiquetas del 1 al 19 para las wacoms y los lápices"
-   ],
+   "checkedAt": "10/09/2026",
+   "labels": [],
    "items": [
     {
      "category": "Tecnología",
@@ -1014,20 +1096,20 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Magic mouse",
-     "qty": 18,
+     "qty": 19,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Falta un mouse",
+     "link": "",
      "id": "ws6-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1036,9 +1118,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1047,9 +1129,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1058,64 +1140,64 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Lápices Wacoms",
-     "qty": 19,
+     "qty": 2,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Wacoms",
-     "qty": 19,
+     "qty": 2,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
-     "name": "Cables micro usb Wacoms",
-     "qty": 19,
+     "name": "Cables Wacoms",
+     "qty": 2,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Adaptadores usb a usb c",
-     "qty": 17,
+     "qty": 21,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Algunos funcionan mal",
+     "link": "",
      "id": "ws6-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
      "name": "Cables usb c",
-     "qty": 14,
+     "qty": 12,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1124,9 +1206,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1135,9 +1217,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1146,9 +1228,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1157,9 +1239,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1168,9 +1250,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1179,9 +1261,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1190,9 +1272,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -1201,9 +1283,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-18",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -1212,9 +1294,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-19",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -1223,17 +1305,17 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws6-20",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   },
   {
    "id": "ws7",
    "name": "WS 7 - Cine",
-   "owner": "Andi",
-   "checkedAt": "30.07.26",
+   "owner": "Oli",
+   "checkedAt": "10/09/2026",
    "labels": [],
    "items": [
     {
@@ -1243,9 +1325,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1254,9 +1336,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1265,9 +1347,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1276,229 +1358,53 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Zapatillas",
-     "qty": 2,
+     "qty": 1,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
      "name": "Control del aire",
-     "qty": 0,
+     "qty": 1,
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "ws7-6",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Tecnología",
-     "name": "lectores memoria",
-     "qty": 13,
-     "needsFix": true,
-     "problem": "1 no lee la tarjeta de memoria",
-     "comment": "",
-     "id": "ws7-7",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Tecnología",
-     "name": "computadoras",
-     "qty": 17,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-8",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Tecnología",
-     "name": "mouse",
-     "qty": 17,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-9",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Tecnología",
-     "name": "teclado",
-     "qty": 17,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-10",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Tecnología",
-     "name": "cargador de mouse",
-     "qty": 18,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-11",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "Auriculares",
-     "qty": 8,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-12",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "Claquetas",
-     "qty": 6,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-13",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "Reflectores 5 en 1",
-     "qty": 6,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-14",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "cargador de batería",
-     "qty": 6,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-15",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "borrador de claqueta",
-     "qty": 5,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-16",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "marcador para claqueta",
-     "qty": 7,
-     "needsFix": false,
-     "problem": "Se gastaron o arruinaron la punta",
-     "comment": "",
-     "id": "ws7-17",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "Trípode",
-     "qty": 23,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-18",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "Cámara sony zv10",
-     "qty": 20,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-19",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "17.0",
-     "qty": 23,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-20",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "adaptador celular trípode y platina",
-     "qty": 23,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-21",
-     "missing": 0,
-     "link": ""
-    },
-    {
-     "category": "Herramientas",
-     "name": "memorias cámara",
-     "qty": 19,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "id": "ws7-22",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
      "name": "Sillas rojas",
      "qty": 16,
-     "needsFix": true,
-     "problem": "1.0",
+     "needsFix": false,
+     "problem": "",
      "comment": "",
-     "id": "ws7-23",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-7",
+     "missing": 0
     },
     {
      "category": "Mobiliario",
-     "name": "Silla blanca",
+     "name": "Sillas blancas",
      "qty": 1,
      "needsFix": false,
      "problem": "",
      "comment": "",
-     "id": "ws7-24",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-8",
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -1507,9 +1413,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
-     "id": "ws7-25",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-9",
+     "missing": 0
     },
     {
      "category": "Librería",
@@ -1518,31 +1424,86 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
-     "id": "ws7-26",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-10",
+     "missing": 0
     },
     {
-     "category": "Librería",
-     "name": "Marcador pizarra",
-     "qty": 3,
+     "category": "Tecnología",
+     "name": "Computadoras",
+     "qty": 17,
      "needsFix": false,
      "problem": "",
      "comment": "",
-     "id": "ws7-27",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-11",
+     "missing": 0
     },
     {
-     "category": "Librería",
-     "name": "Cajita para memorias",
-     "qty": 2,
+     "category": "Tecnología",
+     "name": "Magic mouse",
+     "qty": 17,
      "needsFix": false,
      "problem": "",
      "comment": "",
-     "id": "ws7-28",
-     "missing": 0,
-     "link": ""
+     "link": "",
+     "id": "ws7-12",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Teclados",
+     "qty": 17,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws7-13",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Cables usb C",
+     "qty": 17,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws7-14",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Wacoms",
+     "qty": 17,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws7-15",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Cables Wacoms",
+     "qty": 17,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws7-16",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Lápices Wacoms",
+     "qty": 17,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ws7-17",
+     "missing": 0
     }
    ]
   },
@@ -1560,7 +1521,7 @@
      "needsFix": true,
      "problem": "Broken: Usb port detached",
      "comment": "",
-     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153?pdp_filters=item_id%3AMLA1889976480&matt_tool=89488245#origin=share&sid=share&wid=MLA1889976480&action=copy",
+     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-1",
      "missing": 0
     },
@@ -1571,7 +1532,7 @@
      "needsFix": false,
      "problem": "",
      "comment": "Estado: Good",
-     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153?pdp_filters=item_id%3AMLA1889976480&matt_tool=89488245#origin=share&sid=share&wid=MLA1889976480&action=copy",
+     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-2",
      "missing": 0
     },
@@ -1582,7 +1543,7 @@
      "needsFix": true,
      "problem": "Usable: A4 pin not working",
      "comment": "",
-     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153?pdp_filters=item_id%3AMLA1889976480&matt_tool=89488245#origin=share&sid=share&wid=MLA1889976480&action=copy",
+     "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-3",
      "missing": 0
     },
@@ -1615,7 +1576,7 @@
      "needsFix": false,
      "problem": "",
      "comment": "Estado: Good",
-     "link": "https://www.mercadolibre.com.ar/protoboard-de-400-puntos-experimentador-arduino-en-belgrano/p/MLA2089243318?pdp_filters=item_id%3AMLA645893769&matt_tool=89488245#origin=share&sid=share&wid=MLA645893769&action=copy",
+     "link": "https://www.mercadolibre.com.ar/protoboard-de-400-puntos-experimentador-arduino-en-belgrano/p/MLA2089243318",
      "id": "ws8-6",
      "missing": 0
     },
@@ -1626,7 +1587,7 @@
      "needsFix": false,
      "problem": "",
      "comment": "Estado: Good",
-     "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351?pdp_filters=item_id%3AMLA622602301&matt_tool=89488245#origin=share&sid=share&wid=MLA622602301&action=copy",
+     "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351",
      "id": "ws8-7",
      "missing": 0
     },
@@ -1637,7 +1598,7 @@
      "needsFix": true,
      "problem": "Broken: Didn't come with switch button",
      "comment": "",
-     "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351?pdp_filters=item_id%3AMLA622602301&matt_tool=89488245#origin=share&sid=share&wid=MLA622602301&action=copy",
+     "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351",
      "id": "ws8-8",
      "missing": 0
     },
@@ -1648,7 +1609,7 @@
      "needsFix": false,
      "problem": "",
      "comment": "Estado: Good",
-     "link": "https://www.mercadolibre.com.ar/mini-bomba-de-agua-sumergible-3v-5v-dc/p/MLA2040186010?pdp_filters=item_id%3AMLA1453301075&matt_tool=89488245#origin=share&sid=share&wid=MLA1453301075&action=copy",
+     "link": "https://www.mercadolibre.com.ar/mini-bomba-de-agua-sumergible-3v-5v-dc/p/MLA2040186010",
      "id": "ws8-9",
      "missing": 0
     },
@@ -1690,9 +1651,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1701,9 +1662,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1712,9 +1673,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1723,9 +1684,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1734,9 +1695,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1745,9 +1706,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1756,9 +1717,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Mobiliario",
@@ -1767,9 +1728,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1778,9 +1739,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1789,9 +1750,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1800,9 +1761,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1811,9 +1772,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1822,9 +1783,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1833,9 +1794,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1844,9 +1805,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1855,9 +1816,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1866,9 +1827,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1877,9 +1838,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-18",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1888,9 +1849,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-19",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1898,10 +1859,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-20",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1909,10 +1870,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-21",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1920,10 +1881,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-22",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1932,9 +1893,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-23",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1942,10 +1903,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-24",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1953,10 +1914,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-25",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1964,10 +1925,10 @@
      "qty": 0,
      "needsFix": false,
      "problem": "",
-     "comment": "",
+     "comment": "Cantidad sin cargar en la planilla.",
+     "link": "",
      "id": "estudio-musica-26",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1976,9 +1937,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-27",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Herramientas",
@@ -1987,9 +1948,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-28",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -1998,9 +1959,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-29",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -2009,9 +1970,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-30",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -2020,9 +1981,9 @@
      "needsFix": true,
      "problem": "No hay",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-31",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -2031,9 +1992,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-32",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Tecnología",
@@ -2042,9 +2003,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "",
+     "link": "",
      "id": "estudio-musica-33",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   },
@@ -2053,17 +2014,53 @@
    "name": "LL",
    "owner": "",
    "checkedAt": "",
-   "labels": [
-    "Etiquetas faltantes",
-    "LL 1  x2",
-    "LL 4  x1",
-    "LL 8  x3",
-    "LL 9  x3",
-    "LL 10  x3",
-    "LL 11  x3",
-    "LL 12  x3"
-   ],
-   "items": []
+   "labels": [],
+   "items": [
+    {
+     "category": "Tecnología",
+     "name": "Teclados",
+     "qty": 6,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ll-1",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Mouse mac",
+     "qty": 10,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ll-2",
+     "missing": 0
+    },
+    {
+     "category": "Tecnología",
+     "name": "Cables de mouse",
+     "qty": 9,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ll-3",
+     "missing": 0
+    },
+    {
+     "category": "Mobiliario",
+     "name": "Mouse pad",
+     "qty": 8,
+     "needsFix": false,
+     "problem": "",
+     "comment": "",
+     "link": "",
+     "id": "ll-4",
+     "missing": 0
+    }
+   ]
   },
   {
    "id": "stock-cables",
@@ -2079,9 +2076,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-AXJMXTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
+     "link": "",
      "id": "stock-cables-1",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2090,9 +2087,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-AXJFXTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
+     "link": "",
      "id": "stock-cables-2",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2101,9 +2098,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-AJKPKTM-SU-N-1 · Odoo: 4 · Inventariado: 4",
+     "link": "",
      "id": "stock-cables-3",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2112,9 +2109,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-MA805TM-SU-N-1 · Odoo: 2 · Inventariado: 2",
+     "link": "",
      "id": "stock-cables-4",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2123,9 +2120,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-MBDTFTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
+     "link": "",
      "id": "stock-cables-5",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2134,9 +2131,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-MBDTMTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
+     "link": "",
      "id": "stock-cables-6",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2145,9 +2142,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-MBDTPTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
+     "link": "",
      "id": "stock-cables-7",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2156,9 +2153,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-BOLT3TM-SU-N-1 · Odoo: 2 · Inventariado: 2",
+     "link": "",
      "id": "stock-cables-8",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2167,9 +2164,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-BNC50TM-SU-N-1 · Odoo: 10 · Inventariado: 10",
+     "link": "",
      "id": "stock-cables-9",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2178,9 +2175,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-OPT1MTM-SU-N-1 · Odoo: 2 · Inventariado: 2",
+     "link": "",
      "id": "stock-cables-10",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2189,9 +2186,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-JKC10TM-SU-N-1 · Odoo: 4 · Inventariado: 4",
+     "link": "",
      "id": "stock-cables-11",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2200,9 +2197,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-JK201TM-SU-N-1 · Odoo: 12 · Inventariado: 12",
+     "link": "",
      "id": "stock-cables-12",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2211,9 +2208,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-JKSGPTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
+     "link": "",
      "id": "stock-cables-13",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2222,9 +2219,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-XLR30TM-SU-N-1 · Odoo: 30 · Inventariado: 28",
+     "link": "",
      "id": "stock-cables-14",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2233,9 +2230,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-XLR60TM-SU-N-1 · Odoo: 12 · Inventariado: 12",
+     "link": "",
      "id": "stock-cables-15",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2244,9 +2241,9 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-XLR09TM-SU-N-1 · Odoo: 30 · Inventariado: 30",
+     "link": "",
      "id": "stock-cables-16",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     },
     {
      "category": "Cables",
@@ -2255,14 +2252,14 @@
      "needsFix": false,
      "problem": "",
      "comment": "SKU MA-CAB-XLR15TM-SU-N-1 · Odoo: 8 · Inventariado: 8",
+     "link": "",
      "id": "stock-cables-17",
-     "missing": 0,
-     "link": ""
+     "missing": 0
     }
    ]
   }
  ],
  "loans": [],
  "log": [],
- "version": 2
+ "confirmations": []
 });

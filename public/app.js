@@ -15,12 +15,44 @@ const pendingReq = (l) => l.status === 'pending';
 const lentOut = (itemId) => S.loans.filter((l) => l.itemId === itemId && isActive(l) && pending(l) > 0).reduce((a, l) => a + pending(l), 0);
 const available = (it) => it.qty - (it.missing || 0) - lentOut(it.id);
 const activeLoans = () => S.loans.filter((l) => isActive(l) && pending(l) > 0);
+const confs = () => S.confirmations || [];
+const confFor = (spaceId, date, slot) => confs().find((c) => c.spaceId === spaceId && c.date === date && c.slot === slot);
+const hhmm = (ts) => new Date(ts).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Argentina/Buenos_Aires' });
+const today = () => InvLogic.arParts(Date.now()).date;
+const checkable = () => S.spaces.filter((x) => x.items.length);
+function pendingChecks(spaceId) { // confirmaciones que faltan en el horario vigente
+  const cur = InvLogic.currentSlot();
+  if (!cur) return [];
+  return checkable().filter((x) => (!spaceId || x.id === spaceId) && !confFor(x.id, cur.date, cur.slot));
+}
 const requestsFor = (spaceId) => S.loans.filter((l) => pendingReq(l) && l.fromSpaceId === spaceId);
 const who = () => localStorage.getItem('who') || '';
+const ICONS = {
+  box: '<path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  out: '<path d="M7 17 17 7M9 7h8v8"/>',
+  in: '<path d="M17 7 7 17M15 17H7V9"/>',
+  alert: '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 0 5 5L22 14l-8 8-2.3-2.3a4 4 0 0 0-5-5L2 10l8-8 2.3 2.3a4 4 0 0 0 2.4 2Z"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  swap: '<path d="M7 7h13l-4-4M17 17H4l4 4"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check: '<path d="m5 12 5 5 9-10"/>',
+  bell: '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16v4Z"/>',
+  empty: '<path d="M3 7h18v13H3zM3 7l3-4h12l3 4M9 12h6"/>',
+};
+const icon = (n, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+const catKey = (c) => String(c || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const CAT_CLS = { tecnologia: 'c-tec', mobiliario: 'c-mob', libreria: 'c-lib', herramientas: 'c-her', cables: 'c-cab' };
+const catCls = (c) => CAT_CLS[catKey(c)] || 'c-otr';
+const emptyBox = (msg) => `<div class="table-wrap"><div class="empty">${icon('empty', 'big')}<p>${msg}</p></div></div>`;
+const initials = (n) => { const m = String(n || '').match(/^WS\s*(\d+)/i); return m ? m[1] : String(n || '?').split(/[\s-]+/).filter((w) => /\w/.test(w)).slice(0, 2).map((w) => w[0]).join('').toUpperCase() || '?'; };
 
 function toast(msg, bad) {
   const t = $('toast');
-  t.textContent = msg;
+  t.innerHTML = icon(bad ? 'alert' : 'check') + '<span></span>';
+  t.lastChild.textContent = msg;
   t.className = 'toast show' + (bad ? ' bad' : '');
   clearTimeout(toast.t);
   toast.t = setTimeout(() => (t.className = 'toast'), 3200);
@@ -91,6 +123,7 @@ function markSeen(spaceId) { localStorage.setItem(seenKey(spaceId), String(Date.
 function route() {
   const h = location.hash.replace(/^#\/?/, '').split('/');
   if (h[0] === 'loans') return { view: 'loans' };
+  if (h[0] === 'checks') return { view: 'checks' };
   const id = h[0] === 'ws' && space(h[1]) ? h[1] : S.spaces[0].id;
   const tab = ['stock', 'loans', 'log'].includes(h[2]) ? h[2] : 'stock';
   return { view: 'ws', id, tab };
@@ -100,20 +133,33 @@ window.addEventListener('hashchange', () => { if (S) render(); });
 // ---------- Render ----------
 function render() {
   const r = route();
+  const hadFocus = document.activeElement && document.activeElement.id === 'filter';
+  const selPos = hadFocus ? document.activeElement.selectionStart : 0;
   renderNav(r);
   if (r.view === 'loans') main.innerHTML = viewAllLoans();
+  else if (r.view === 'checks') main.innerHTML = viewChecks();
   else main.innerHTML = viewSpace(space(r.id), r.tab);
+  if (hadFocus) { const f = $('filter'); if (f) { f.focus(); f.setSelectionRange(selPos, selPos); } }
+  fillMyWs();
   $('syncInfo').textContent = S.local
     ? 'Modo local: los cambios se guardan solo en este navegador. Para compartirlos entre WS, publicá la app en Vercel.'
     : S.persistent
       ? 'Se sincroniza solo cada pocos segundos.'
       : 'Modo prueba: los datos no se guardan al reiniciar el servidor.';
+  $('syncInfo').className = 'sync ' + (S.local ? 'is-local' : S.persistent ? 'is-live' : 'is-test');
   $('resetBtn').hidden = !S.local;
+  const mine = myWs();
+  const n = (mine ? requestsFor(mine).length + pendingChecks(mine).length : 0);
+  document.title = (n ? `(${n}) ` : '') + 'Inventario Workshops';
+  const alerts = S.loans.filter(pendingReq).length + (myWs() ? pendingChecks(myWs()).length : 0);
+  $('menuBadge').textContent = alerts; $('menuBadge').hidden = !alerts;
+  $('topTitle').textContent = r.view === 'loans' ? 'Préstamos y pedidos' : r.view === 'checks' ? 'Confirmaciones' : space(r.id).name;
 }
 
 function renderNav(r) {
   const total = activeLoans().length;
-  let h = `<a href="#/loans" class="${r.view === 'loans' ? 'on' : ''}"><span>Préstamos y pedidos</span>${S.loans.some(pendingReq) ? `<span class="badge req" title="Pedidos pendientes">${S.loans.filter(pendingReq).length}</span>` : `<span class="badge quiet">${total}</span>`}</a><div class="sep"></div>`;
+  const chk = myWs() ? pendingChecks(myWs()).length : pendingChecks().length;
+  let h = `<a href="#/loans" class="${r.view === 'loans' ? 'on' : ''}"><span>Préstamos y pedidos</span>${S.loans.some(pendingReq) ? `<span class="badge req" title="Pedidos pendientes">${S.loans.filter(pendingReq).length}</span>` : total ? `<span class="badge quiet">${total}</span>` : ''}</a><a href="#/checks" class="${r.view === 'checks' ? 'on' : ''}"><span>Confirmaciones</span>${chk ? `<span class="badge req" title="Confirmaciones pendientes">${chk}</span>` : ''}</a><div class="sep"></div>`;
   for (const s of S.spaces) {
     const n = unseen(s.id).length, req = requestsFor(s.id).length;
     const out = activeLoans().filter((l) => l.fromSpaceId === s.id).length;
@@ -128,33 +174,41 @@ function tabsHtml(s, tab) {
   return `<div class="tabs">${t('stock', 'Inventario')}${t('loans', 'Préstamos')}${t('log', 'Historial')}</div>`;
 }
 
+const stat = (ic, n, label, tone) => `<div class="stat t-${tone} ${n ? '' : 'is-zero'}">${icon(ic)}<div><b>${n}</b><span>${label}</span></div></div>`;
 function viewSpace(s, tab) {
   const out = activeLoans().filter((l) => l.fromSpaceId === s.id).reduce((a, l) => a + pending(l), 0);
   const inn = activeLoans().filter((l) => l.toSpaceId === s.id).reduce((a, l) => a + pending(l), 0);
   const fix = s.items.filter((i) => i.needsFix).length;
   const news = unseen(s.id);
   const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
-  let h = `<div class="head"><div>
+  let h = `<div class="head"><div class="title"><span class="mark">${esc(initials(s.name))}</span><div>
       <h1>${esc(s.name)}</h1>
       <div class="owner">Responsable: <b>${s.owner ? esc(s.owner) : 'sin asignar'}</b><button data-act="owner" data-id="${s.id}" type="button">cambiar</button>
         · Último relevamiento: <b>${s.checkedAt ? esc(s.checkedAt) : 'sin fecha'}</b><button data-act="info" data-id="${s.id}" type="button">editar ficha</button></div>
-    </div>
+      ${(() => { const c = confs().find((x) => x.spaceId === s.id && x.date === today()); return c ? `<div class="owner">A cargo ahora: <b>${esc(c.owner)}</b> · confirmado a las ${hhmm(c.ts)} (turno de las ${c.slot}:00)${c.stockOk ? '' : ' · <span class="zero">con diferencias de stock</span>'}</div>` : ''; })()}
+    </div></div>
     <div class="stats">
-      <div class="stat"><b>${s.items.length}</b><span>elementos</span></div>
-      <div class="stat bad"><b>${miss}</b><span>unidades faltan</span></div>
-      <div class="stat loan"><b>${out}</b><span>prestadas afuera</span></div>
-      <div class="stat"><b>${inn}</b><span>recibidas de otros</span></div>
-      <div class="stat bad"><b>${fix}</b><span>a arreglar</span></div>
+      ${stat('box', s.items.length, 'elementos', 'blue')}
+      ${stat('alert', miss, 'unidades faltan', 'red')}
+      ${stat('out', out, 'prestadas afuera', 'amber')}
+      ${stat('in', inn, 'recibidas de otros', 'teal')}
+      ${stat('wrench', fix, 'a arreglar', 'red')}
     </div></div>
     ${(s.labels || []).length ? `<details class="labels"><summary>Etiquetas faltantes (${s.labels.length})</summary><ul>${s.labels.map((l) => `<li>${esc(l)}</li>`).join('')}</ul></details>` : ''}`;
+  const cur = InvLogic.currentSlot();
+  if (cur && s.items.length && !confFor(s.id, cur.date, cur.slot)) {
+    h += `<div class="alert req">${icon('clock', 'al-ic')}<div class="al-body"><div class="row"><strong>Confirmación de las ${cur.slot}:00 pendiente</strong>
+      <button class="btn" data-act="confirm" data-id="${s.id}" type="button">Confirmar stock y responsable</button></div>
+      <div class="hint">Confirmá que el stock está completo y quién está a cargo del workshop en este horario.</div></div></div>`;
+  }
   const reqs = requestsFor(s.id);
   if (reqs.length) {
     h += `<div class="alert req"><strong>${reqs.length === 1 ? '1 pedido espera' : reqs.length + ' pedidos esperan'} tu respuesta</strong><div class="tickets">${reqs.map((l) => ticket(l, s.id)).join('')}</div></div>`;
   }
   if (news.length) {
-    h += `<div class="alert"><div class="row"><strong>Movimientos nuevos en este workshop</strong>
+    h += `<div class="alert">${icon('bell', 'al-ic')}<div class="al-body"><div class="row"><strong>Movimientos nuevos en este workshop</strong>
       <button class="btn sm sec" data-act="seen" data-id="${s.id}" type="button">Entendido</button></div>
-      <ul>${news.slice(0, 8).map((e) => `<li>${esc(e.text)} <span class="hint">(${fmt(e.ts)})</span></li>`).join('')}</ul></div>`;
+      <ul>${news.slice(0, 8).map((e) => `<li>${esc(e.text)} <span class="hint">(${fmt(e.ts)})</span></li>`).join('')}</ul></div></div>`;
   }
   h += tabsHtml(s, tab);
   if (tab === 'stock') h += stockTable(s);
@@ -163,33 +217,36 @@ function viewSpace(s, tab) {
   return h;
 }
 
-let filterText = '';
+let filterText = '', filterCat = '';
 function stockTable(s) {
-  const q = filterText.toLowerCase();
-  const items = s.items.filter((i) => !q || (i.name + ' ' + i.category + ' ' + i.comment).toLowerCase().includes(q));
+  const q = catKey(filterText);
+  const cats = [...new Set(s.items.map((i) => i.category))].sort();
+  if (filterCat && !cats.includes(filterCat)) filterCat = '';
+  const items = s.items.filter((i) => (!q || catKey(i.name + ' ' + i.category + ' ' + i.comment).includes(q)) && (!filterCat || i.category === filterCat));
   let h = `<div class="toolbar">
-      <input type="search" id="filter" placeholder="Buscar elemento o categoría" value="${esc(filterText)}" aria-label="Buscar">
-      <button class="btn" data-act="request" data-to="${s.id}" type="button">Pedir material a otro workshop</button>
-      <button class="btn sec" data-act="addItem" data-id="${s.id}" type="button">+ Agregar elemento</button>
+      <label class="search">${icon('search')}<input type="search" id="filter" placeholder="Buscar elemento" value="${esc(filterText)}" aria-label="Buscar elemento"></label>
+      <button class="btn" data-act="request" data-to="${s.id}" type="button">${icon('swap')}Pedir a otro workshop</button>
+      <button class="btn sec" data-act="addItem" data-id="${s.id}" type="button">${icon('plus')}Agregar elemento</button>
       <button class="btn sec" data-act="lend" data-from="${s.id}" type="button">Prestar directo</button>
     </div>`;
-  if (!items.length) return h + `<div class="table-wrap"><div class="empty">${s.items.length ? 'Ningún elemento coincide con la búsqueda.' : 'Este workshop todavía no tiene elementos. Agregá el primero.'}</div></div>`;
-  h += `<div class="table-wrap"><table><thead><tr><th>Elemento</th><th class="num">Total</th><th class="num">Faltan</th><th class="num">Prestados</th><th class="num">En el WS</th><th>Estado</th><th></th></tr></thead><tbody>`;
+  if (cats.length > 1) h += `<div class="chips" role="group" aria-label="Filtrar por categoría"><button type="button" class="chip ${filterCat ? '' : 'on'}" data-act="cat" data-cat="">Todas <span>${s.items.length}</span></button>${cats.map((c) => `<button type="button" class="chip ${catCls(c)} ${filterCat === c ? 'on' : ''}" data-act="cat" data-cat="${esc(c)}">${esc(c)} <span>${s.items.filter((i) => i.category === c).length}</span></button>`).join('')}</div>`;
+  if (!items.length) return h + emptyBox(s.items.length ? 'Ningún elemento coincide con la búsqueda.' : 'Este workshop todavía no tiene elementos. Agregá el primero.');
+  h += `<div class="table-wrap"><table class="stock"><thead><tr><th>Elemento</th><th class="num">Total</th><th class="num">Faltan</th><th class="num">Prestados</th><th class="num">En el WS</th><th>Estado</th><th></th></tr></thead><tbody>`;
   for (const i of items) {
     const loans = activeLoans().filter((l) => l.itemId === i.id);
     const out = lentOut(i.id), miss = i.missing || 0, here = i.qty - miss - out;
-    h += `<tr><td><span class="cat">${esc(i.category)}</span>${esc(i.name)}${i.comment ? `<div class="sub">${esc(i.comment)}</div>` : ''}${i.link ? `<div class="sub"><a href="${esc(i.link)}" target="_blank" rel="noopener">Ver link</a></div>` : ''}
+    h += `<tr class="${here === 0 ? 'row-empty' : ''}"><td class="c-name"><span class="cat ${catCls(i.category)}">${esc(i.category)}</span><span class="nm">${esc(i.name)}</span>${i.comment ? `<div class="sub">${esc(i.comment)}</div>` : ''}${i.link ? `<div class="sub"><a href="${esc(i.link)}" target="_blank" rel="noopener">Ver link</a></div>` : ''}
         ${S.loans.filter((l) => pendingReq(l) && l.itemId === i.id).map((l) => `<div class="sub reqnote">Pedido pendiente: ${l.qty} para ${esc(space(l.toSpaceId)?.name || '?')} (${esc(l.person)})</div>`).join('')}
         ${loans.map((l) => `<div class="loanchip"><span>Prestado: <b>${pending(l)}</b> → <b>${esc(space(l.toSpaceId)?.name || '?')}</b> · lo llevó <b>${esc(l.person)}</b> · ${fmt(l.createdAt)}${l.acceptedBy ? ` · aceptó ${esc(l.acceptedBy)}` : ''}${l.note ? ` · ${esc(l.note)}` : ''}</span><button class="btn sm sec" data-act="return" data-loan="${l.id}" type="button">Devolver</button></div>`).join('')}</td>
-      <td class="num">${i.qty}</td>
-      <td class="num"><div class="stepper"><button type="button" aria-label="Menos faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss - 1}" ${miss <= 0 ? 'disabled' : ''}>−</button><b class="${miss ? 'zero' : ''}">${miss}</b><button type="button" aria-label="Más faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss + 1}" ${miss >= i.qty - out ? 'disabled' : ''}>+</button></div></td>
-      <td class="num ${out ? 'out' : ''}">${out || '–'}</td>
-      <td class="num ${here === 0 ? 'zero' : ''}">${here}</td>
-      <td>${i.needsFix ? `<span class="fix">Arreglar</span>${i.problem ? `<div class="sub">${esc(i.problem)}</div>` : ''}` : `<span class="okk">OK</span>${i.problem ? `<div class="sub">${esc(i.problem)}</div>` : ''}`}</td>
-      <td><div class="acts">
+      <td class="num" data-label="Total"><div class="stepper"><button type="button" aria-label="Quitar unidades" title="Quitar (se perdió, se rompió…)" data-act="qty" data-dir="-1" data-id="${s.id}" data-item="${i.id}" ${here > 0 ? '' : 'disabled'}>−</button><b>${i.qty}</b><button type="button" aria-label="Agregar unidades" title="Agregar (nos dieron nuevos…)" data-act="qty" data-dir="1" data-id="${s.id}" data-item="${i.id}">+</button></div></td>
+      <td class="num" data-label="Faltan"><div class="stepper"><button type="button" aria-label="Menos faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss - 1}" ${miss <= 0 ? 'disabled' : ''}>−</button><b class="${miss ? 'zero' : ''}">${miss}</b><button type="button" aria-label="Más faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss + 1}" ${miss >= i.qty - out ? 'disabled' : ''}>+</button></div></td>
+      <td class="num ${out ? 'out' : ''}" data-label="Prestados">${out || '–'}</td>
+      <td class="num" data-label="En el WS"><span class="here ${here === 0 ? 'none' : ''}">${here}</span></td>
+      <td data-label="Estado" class="c-state">${i.needsFix ? `<span class="pill bad">Arreglar</span>` : `<span class="pill ok">OK</span>`}${i.problem ? `<div class="sub">${esc(i.problem)}</div>` : ''}</td>
+      <td class="c-acts"><div class="acts">
         <button class="btn sm" data-act="request" data-from="${s.id}" data-item="${i.id}" type="button" ${here > 0 ? '' : 'disabled'}>Pedir</button>
         <button class="btn sm sec" data-act="lend" data-from="${s.id}" data-item="${i.id}" type="button" ${here > 0 ? '' : 'disabled'}>Prestar</button>
-        <button class="btn sm sec" data-act="editItem" data-id="${s.id}" data-item="${i.id}" type="button">Editar</button>
+        <button class="btn sm ghost" data-act="editItem" data-id="${s.id}" data-item="${i.id}" type="button" aria-label="Editar ${esc(i.name)}">${icon('edit')}<span>Editar</span></button>
       </div></td></tr>`;
   }
   h += '</tbody></table></div>';
@@ -230,7 +287,7 @@ function ticket(l, ctx = null, showActions = true) {
 }
 
 function spaceLoans(s) {
-  const block = (arr, empty) => arr.length ? `<div class="tickets">${arr.map((l) => ticket(l, s.id)).join('')}</div>` : `<div class="table-wrap"><div class="empty">${empty}</div></div>`;
+  const block = (arr, empty) => arr.length ? `<div class="tickets">${arr.map((l) => ticket(l, s.id)).join('')}</div>` : emptyBox(empty);
   const recent = (arr) => [...arr.filter((l) => pendingReq(l) || (isActive(l) && pending(l) > 0)), ...arr.filter((l) => !pendingReq(l) && !(isActive(l) && pending(l) > 0)).slice(0, 8)];
   const asOwner = S.loans.filter((l) => l.fromSpaceId === s.id);
   const asAsker = S.loans.filter((l) => l.toSpaceId === s.id);
@@ -242,8 +299,25 @@ function spaceLoans(s) {
 
 function spaceLog(s) {
   const ev = S.log.filter((e) => e.spaceIds.includes(s.id)).slice(0, 100);
-  if (!ev.length) return '<div class="table-wrap"><div class="empty">Todavía no hay movimientos registrados.</div></div>';
-  return `<ul class="log">${ev.map((e) => `<li><time>${fmt(e.ts)}${e.by ? ' · ' + esc(e.by) : ''}</time><span>${esc(e.text)}</span></li>`).join('')}</ul>`;
+  if (!ev.length) return emptyBox('Todavía no hay movimientos registrados.');
+  return `<ul class="log">${ev.map((e) => `<li class="lg-${esc(e.type)}"><time>${fmt(e.ts)}${e.by ? ' · ' + esc(e.by) : ''}</time><span>${esc(e.text)}</span></li>`).join('')}</ul>`;
+}
+
+function viewChecks() {
+  const cur = InvLogic.currentSlot(), d = today();
+  const cell = (s, slot) => {
+    const c = confFor(s.id, d, slot);
+    if (c) return `<span class="ck ${c.stockOk ? 'ok' : 'warn'}" title="${esc(c.note || 'Stock completo')}">${c.stockOk ? 'OK' : 'Diferencias'} · ${esc(c.owner)} · ${hhmm(c.ts)}</span>`;
+    if (!cur || slot > cur.slot) return '<span class="ck none">–</span>';
+    if (slot === cur.slot) return `<button class="btn sm" data-act="confirm" data-id="${s.id}" type="button">Confirmar</button>`;
+    return '<span class="ck miss">Falta</span>';
+  };
+  return `<div class="head"><div><h1>Confirmaciones de hoy</h1>
+      <div class="owner">Cada workshop confirma el stock y quién está a cargo a las ${InvLogic.SLOTS.join(', ')} hs (hora de Argentina).</div></div></div>
+    <div class="table-wrap"><table class="checks"><thead><tr><th>Workshop</th>${InvLogic.SLOTS.map((h) => `<th>${h}:00</th>`).join('')}</tr></thead><tbody>
+    ${checkable().map((s) => `<tr><td><a href="#/ws/${s.id}">${esc(s.name)}</a></td>${InvLogic.SLOTS.map((h) => `<td data-label="${h}:00">${cell(s, h)}</td>`).join('')}</tr>`).join('')}
+    </tbody></table></div>
+    <p class="hint">Las confirmaciones quedan guardadas con fecha, hora, responsable y estado del stock, y también aparecen en el Historial de cada workshop.</p>`;
 }
 
 function viewAllLoans() {
@@ -254,7 +328,7 @@ function viewAllLoans() {
     <button class="btn" data-act="request" type="button">Pedir material</button></div>
     ${reqs.length ? `<h2 class="sec-title">Pedidos esperando respuesta</h2>${list(reqs)}` : ''}
     <h2 class="sec-title">Préstamos activos</h2>
-    ${act.length ? list(act) : '<div class="table-wrap"><div class="empty">No hay préstamos pendientes. Todo está en su lugar.</div></div>'}
+    ${act.length ? list(act) : emptyBox('No hay préstamos pendientes. Todo está en su lugar.')}
     ${done.length ? `<h2 class="sec-title">Historial reciente</h2><div class="tickets">${done.map((l) => ticket(l, null, false)).join('')}</div>` : ''}`;
 }
 
@@ -326,10 +400,38 @@ function openLend({ from, item, to, mode = 'lend' } = {}) {
 
 function needName() {
   if (who()) return false;
-  toast('Escribí tu nombre (arriba a la izquierda) para poder responder.', true);
+  toast('Escribí tu nombre en el menú para poder responder.', true);
+  openMenu(true);
   $('whoInput').focus();
   return true;
 }
+function openConfirm(spaceId) {
+  const cur = InvLogic.currentSlot();
+  if (!cur) { toast('Todavía no es horario de confirmación: la primera es a las 8:00.', true); return; }
+  const s = space(spaceId);
+  const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
+  const out = activeLoans().filter((l) => l.fromSpaceId === s.id).reduce((a, l) => a + pending(l), 0);
+  const prev = confFor(s.id, cur.date, cur.slot);
+  const form = openDialog(`<h2>Confirmación de las ${cur.slot}:00</h2>
+    <p><b>${esc(s.name)}</b><br><span class="hint">${s.items.length} elementos · ${miss} unidades marcadas como faltantes · ${out} prestadas afuera</span></p>
+    <label class="field"><span>¿Quién está a cargo del workshop ahora?</span><input name="owner" value="${esc(prev?.owner || who() || s.owner)}" maxlength="80" required placeholder="Nombre"></label>
+    <fieldset class="field" style="border:0;padding:0;margin:0"><span>¿El stock coincide con lo que figura en la página?</span>
+      <label class="check"><input type="radio" name="stock" value="yes" required ${prev && prev.stockOk ? 'checked' : ''}> Sí, está completo y coincide</label>
+      <label class="check"><input type="radio" name="stock" value="no" ${prev && !prev.stockOk ? 'checked' : ''}> No, hay diferencias</label></fieldset>
+    <label class="field" id="noteBox" hidden><span>¿Qué diferencia hay?</span><textarea name="note" rows="3" maxlength="500" placeholder="Ej: faltan 2 mouses; la silla 4 está rota">${esc(prev?.note || '')}</textarea>
+      <span class="hint">Después ajustá los faltantes con − / + en la tabla del inventario.</span></label>
+    ${foot('Confirmar')}`,
+    async (fd) => {
+      localStorage.setItem('who', fd.get('owner') || who());
+      await act({ type: 'confirmSlot', spaceId, owner: fd.get('owner'), stockOk: fd.get('stock') === 'yes', note: fd.get('note') });
+      toast(`Confirmación de las ${cur.slot}:00 registrada.`);
+    });
+  const box = form.querySelector('#noteBox');
+  const sync = () => { box.hidden = form.querySelector('[name=stock]:checked')?.value !== 'no'; };
+  form.querySelectorAll('[name=stock]').forEach((r) => r.addEventListener('change', sync));
+  sync();
+}
+
 function openReject(loanId) {
   const l = S.loans.find((x) => x.id === loanId);
   openDialog(`<h2>Rechazar pedido</h2>
@@ -377,6 +479,26 @@ function openItem(spaceId, itemId) {
   });
 }
 
+function openQty(spaceId, itemId, dir) {
+  const s = space(spaceId), it = s.items.find((i) => i.id === itemId);
+  const out = lentOut(it.id), here = it.qty - (it.missing || 0) - out;
+  const add = dir > 0;
+  const reasons = add ? ['Nos dieron nuevos', 'Apareció uno que faltaba', 'Volvió de reparación', 'Corrección de conteo'] : ['Se perdió', 'Se rompió', 'Se dio de baja', 'Corrección de conteo'];
+  openDialog(`<h2>${add ? 'Agregar' : 'Quitar'} ${esc(it.name)}</h2>
+    <p>${esc(s.name)} · Total actual: <b>${it.qty}</b>${add ? '' : ` · se pueden quitar hasta ${here}`}</p>
+    <label class="field"><span>Cantidad</span><input name="n" type="number" min="1" ${add ? '' : `max="${here}"`} value="1" required></label>
+    <label class="field"><span>Motivo</span><select name="reason">${reasons.map((r) => `<option>${r}</option>`).join('')}<option value="">Otro…</option></select></label>
+    <label class="field"><span>Detalle (opcional)</span><input name="note" maxlength="150" placeholder="${add ? 'Ej: los trajo Mariano de depósito' : 'Ej: el n° 8 dejó de andar'}"></label>
+    ${foot(add ? 'Agregar' : 'Quitar')}`,
+    async (fd) => {
+      const n = Number(fd.get('n')), note = String(fd.get('note') || '').trim();
+      const reason = [fd.get('reason'), note].filter(Boolean).join(': ');
+      if (!reason) throw new Error('Escribí el motivo en el detalle.');
+      const r = await act({ type: 'adjustQty', spaceId, itemId, delta: add ? n : -n, reason });
+      toast(`Listo. Ahora hay ${r.qty} ${it.name}.`);
+    });
+}
+
 function openOwner(spaceId) {
   const s = space(spaceId);
   openDialog(`<h2>Responsable de ${esc(s.name)}</h2>
@@ -414,18 +536,32 @@ main.addEventListener('click', (e) => {
   if (d.act === 'addItem') openItem(d.id);
   if (d.act === 'editItem') openItem(d.id, d.item);
   if (d.act === 'owner') openOwner(d.id);
+  if (d.act === 'confirm') openConfirm(d.id);
   if (d.act === 'info') openInfo(d.id);
+  if (d.act === 'qty') openQty(d.id, d.item, Number(d.dir));
   if (d.act === 'miss') act({ type: 'setMissing', spaceId: d.id, itemId: d.item, missing: d.to }).catch((x) => toast(x.message, true));
   if (d.act === 'seen') markSeen(d.id);
+  if (d.act === 'cat') { filterCat = d.cat; render(); }
 });
 main.addEventListener('input', (e) => {
   if (e.target.id !== 'filter') return;
   filterText = e.target.value;
-  const pos = e.target.selectionStart;
   render();
-  const f = $('filter'); f.focus(); f.setSelectionRange(pos, pos);
 });
 $('newSpaceBtn').addEventListener('click', openNewSpace);
+$('syncBtn').addEventListener('click', async () => {
+  if (!confirm('Se traen los cambios de la planilla (cantidades, estados, comentarios y responsables). No se borran préstamos, pedidos ni faltantes. ¿Seguir?')) return;
+  try {
+    const r = await act({ type: 'syncSeed', ...(localMode ? { seed: window.SEED } : {}) });
+    toast(`Inventario actualizado: ${r.updated} elementos modificados y ${r.added} nuevos.`);
+  } catch (x) { toast(x.message, true); }
+});
+let lastSlotKey = '';
+setInterval(() => {
+  if (!S) return;
+  const c = InvLogic.currentSlot(), k = c ? c.date + c.slot : '';
+  if (k !== lastSlotKey) { lastSlotKey = k; if (!dlg.open) render(); }
+}, 30000);
 $('resetBtn').addEventListener('click', () => {
   if (!confirm('Se borran los cambios y préstamos de este navegador y se vuelve a cargar el inventario del Excel. ¿Seguir?')) return;
   localStorage.removeItem(LOCAL_KEY); S = null; refresh();
@@ -433,10 +569,24 @@ $('resetBtn').addEventListener('click', () => {
 $('whoInput').value = who();
 function fillMyWs() {
   const sel = $('myWs');
+  const key = myWs() + '|' + S.spaces.map((x) => x.id + ':' + x.name).join(',');
+  if (sel.dataset.key === key) return; // no rearmar el selector si no cambió (se cerraría si está abierto)
+  sel.dataset.key = key;
   sel.innerHTML = '<option value="">(sin elegir)</option>' + S.spaces.map((x) => `<option value="${esc(x.id)}" ${x.id === myWs() ? 'selected' : ''}>${esc(x.name)}</option>`).join('');
 }
-$('myWs').addEventListener('change', (e) => localStorage.setItem('myWs', e.target.value));
+$('myWs').addEventListener('change', (e) => { localStorage.setItem('myWs', e.target.value); render(); });
 $('whoInput').addEventListener('input', (e) => { localStorage.setItem('who', e.target.value.trim()); if (S) renderNav(route()); });
+
+// ---------- Menú en celular ----------
+function openMenu(open) {
+  document.body.classList.toggle('menu-open', open);
+  $('menuBtn').setAttribute('aria-expanded', String(open));
+}
+$('menuBtn').addEventListener('click', () => openMenu(!document.body.classList.contains('menu-open')));
+$('scrim').addEventListener('click', () => openMenu(false));
+nav.addEventListener('click', (e) => { if (e.target.closest('a')) openMenu(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) openMenu(false); });
+window.addEventListener('hashchange', () => { window.scrollTo(0, 0); });
 
 // ---------- Carga y sincronización ----------
 async function refresh(silent) {
@@ -445,7 +595,7 @@ async function refresh(silent) {
     const j = await api('/api/state');
     const changed = !S || j.rev !== S.rev;
     S = j; initSeen();
-    if (changed) { render(); fillMyWs(); }
+    if (changed) render();
   } catch (x) { if (!silent) main.innerHTML = `<div class="alert">${esc(x.message)}</div>`; }
 }
 refresh();

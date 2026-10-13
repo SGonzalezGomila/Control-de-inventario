@@ -28,6 +28,21 @@ function findItem(space, id) {
   return it;
 }
 const pending = (l) => l.qty - l.returned;
+const TZ = 'America/Argentina/Buenos_Aires';
+const SLOTS = [8, 10, 12, 16, 18, 20]; // horarios de confirmación (hora de Argentina)
+function arParts(ts) {
+  const f = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const o = {};
+  f.formatToParts(new Date(ts)).forEach((x) => { o[x.type] = x.value; });
+  return { date: `${o.year}-${o.month}-${o.day}`, hour: Number(o.hour), minute: Number(o.minute) };
+}
+// Horario de confirmación vigente: el último que ya empezó hoy (null antes de las 8:00).
+function currentSlot(ts = Date.now()) {
+  const { date, hour } = arParts(ts);
+  let slot = null;
+  SLOTS.forEach((h) => { if (hour >= h) slot = h; });
+  return slot === null ? null : { date, slot };
+}
 const isActive = (l) => (l.status || 'active') === 'active';
 function lentOut(state, itemId) {
   return state.loans.filter((l) => l.itemId === itemId && isActive(l) && pending(l) > 0).reduce((a, l) => a + pending(l), 0);
@@ -94,6 +109,24 @@ const actions = {
     if (it.qty - n < lentOut(state, it.id)) throw new HttpError(400, 'Hay más prestados que lo que quedaría en el WS.');
     it.missing = n;
     addLog(state, { type: 'missing', by: str(p.by, 80), spaceIds: [s.id], text: `${s.name}: ${n ? `faltan ${n} de ${it.name}` : `${it.name} completo (no falta nada)`}` });
+  },
+  adjustQty(state, p) {
+    const s = findSpace(state, p.spaceId);
+    const it = findItem(s, p.itemId);
+    const delta = int(p.delta);
+    if (!delta || Math.abs(delta) > 9999) throw new HttpError(400, 'Indicá cuántas unidades se agregan o se quitan.');
+    const reason = str(p.reason, 200);
+    if (!reason) throw new HttpError(400, 'Indicá el motivo.');
+    const next = it.qty + delta;
+    const min = (it.missing || 0) + lentOut(state, it.id);
+    if (next < min) throw new HttpError(400, `Solo se pueden quitar ${it.qty - min}: el resto está prestado o marcado como faltante.`);
+    const before = it.qty;
+    it.qty = next;
+    addLog(state, {
+      type: 'qty', by: str(p.by, 80), spaceIds: [s.id],
+      text: `${s.name}: ${delta > 0 ? `se agregaron ${delta}` : `se quitaron ${-delta}`} × ${it.name} (${reason}). Total: ${before} → ${next}`,
+    });
+    return { qty: next };
   },
   setInfo(state, p) {
     const s = findSpace(state, p.spaceId);
@@ -207,6 +240,57 @@ const actions = {
     loan.status = 'cancelled'; loan.respondedAt = Date.now(); loan.respondedBy = str(p.by, 80);
     addLog(state, { type: 'cancel-request', by: str(p.by, 80), spaceIds: [loan.fromSpaceId, loan.toSpaceId], loanId: loan.id, text: `Se canceló el pedido de ${loan.person}: ${loan.qty} × ${loan.itemName}` });
   },
+  confirmSlot(state, p) {
+    const s = findSpace(state, p.spaceId);
+    const cur = currentSlot();
+    if (!cur) throw new HttpError(400, 'Todavía no es horario de confirmación: la primera es a las 8:00.');
+    const owner = str(p.owner, 80);
+    if (!owner) throw new HttpError(400, 'Indicá quién está a cargo del workshop.');
+    const stockOk = p.stockOk === true || p.stockOk === 'true';
+    const note = str(p.note, 500);
+    if (!stockOk && !note) throw new HttpError(400, 'Contá qué diferencia hay en el stock.');
+    state.confirmations = (state.confirmations || []).filter((c) => !(c.spaceId === s.id && c.date === cur.date && c.slot === cur.slot));
+    const by = str(p.by, 80) || owner;
+    state.confirmations.unshift({ id: uid(), spaceId: s.id, date: cur.date, slot: cur.slot, owner, stockOk, note, by, ts: Date.now() });
+    state.confirmations = state.confirmations.slice(0, 800);
+    addLog(state, {
+      type: 'check', by, spaceIds: [s.id],
+      text: `${s.name}: confirmación de las ${cur.slot}:00. A cargo: ${owner}. Stock ${stockOk ? 'completo' : `con diferencias (${note})`}`,
+    });
+    return { date: cur.date, slot: cur.slot };
+  },
+  syncSeed(state, p) {
+    const seed = p.seed;
+    if (!seed || !Array.isArray(seed.spaces)) throw new HttpError(400, 'No hay datos del Excel para importar.');
+    const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim();
+    const key = (i) => norm(i.category) + '|' + norm(i.name);
+    let added = 0, updated = 0, newSpaces = 0;
+    for (const ss of seed.spaces) {
+      let sp = state.spaces.find((x) => x.id === ss.id);
+      if (!sp) {
+        state.spaces.push(JSON.parse(JSON.stringify(ss)));
+        newSpaces++; added += ss.items.length;
+        continue;
+      }
+      if (ss.owner) sp.owner = ss.owner;
+      if (ss.checkedAt) sp.checkedAt = ss.checkedAt;
+      if (Array.isArray(ss.labels) && ss.labels.length) sp.labels = ss.labels.slice();
+      const used = new Set();
+      for (const si of ss.items) {
+        const it = sp.items.find((x) => !used.has(x.id) && key(x) === key(si));
+        if (!it) {
+          sp.items.push({ id: uid(), name: si.name, category: si.category, qty: si.qty, missing: 0, needsFix: si.needsFix, problem: si.problem, comment: si.comment, link: si.link || '' });
+          added++; continue;
+        }
+        used.add(it.id);
+        const minQty = lentOut(state, it.id) + (it.missing || 0);
+        const next = { qty: Math.max(si.qty, minQty), needsFix: si.needsFix, problem: si.problem, comment: si.comment, link: si.link || '' };
+        if (Object.keys(next).some((k) => it[k] !== next[k])) { Object.assign(it, next); updated++; }
+      }
+    }
+    addLog(state, { type: 'sync', by: str(p.by, 80), spaceIds: [], text: `Se actualizó el inventario desde la planilla: ${updated} elementos modificados, ${added} nuevos${newSpaces ? `, ${newSpaces} workshops nuevos` : ''}` });
+    return { added, updated, newSpaces };
+  },
   deleteLoan(state, p) {
     const i = state.loans.findIndex((l) => l.id === p.loanId);
     if (i < 0) throw new HttpError(404, 'No existe ese préstamo.');
@@ -225,5 +309,5 @@ function applyAction(state, body) {
   return result;
 }
 
-return { actions, HttpError, applyAction };
+return { actions, HttpError, applyAction, SLOTS, arParts, currentSlot };
 });

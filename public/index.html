@@ -2,31 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inventario por WS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1b2d">
+  <title>Inventario Workshops</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233b5bfd'/%3E%3Cpath d='M19 8.5 12 5 5 8.5v7l7 3.5 7-3.5v-7Z M5 8.5l7 3.5 7-3.5M12 12v7' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="side">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span class="badge req" id="menuBadge" hidden></span>
+    </button>
+    <span class="top-title" id="topTitle">Inventario Workshops</span>
+  </header>
+  <div class="scrim" id="scrim"></div>
   <div class="app">
     <aside class="side" id="side">
-      <div class="brand">Inventario Workshops</div>
-      <label class="who">
-        <span>Tu nombre</span>
-        <input id="whoInput" type="text" placeholder="Ej: Gero" autocomplete="name">
-      </label>
-      <label class="who">
-        <span>Mi workshop</span>
-        <select id="myWs"></select>
-      </label>
+      <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8.5 12 5 5 8.5v7l7 3.5 7-3.5v-7Z"/><path d="m5 8.5 7 3.5 7-3.5M12 12v7"/></svg></span><span>Inventario<small>Workshops</small></span></div>
+      <div class="me">
+        <label class="who">
+          <span>Tu nombre</span>
+          <input id="whoInput" type="text" placeholder="Ej: Gero" autocomplete="name">
+        </label>
+        <label class="who">
+          <span>Mi workshop</span>
+          <select id="myWs"></select>
+        </label>
+      </div>
       <nav id="nav" aria-label="Workshops"></nav>
-      <button class="ghost-btn" id="newSpaceBtn" type="button">+ Nuevo workshop</button>
-      <button class="ghost-btn" id="resetBtn" type="button" hidden>Restaurar datos del Excel</button>
-      <p class="sync" id="syncInfo"></p>
+      <div class="side-foot">
+        <button class="ghost-btn" id="newSpaceBtn" type="button">+ Nuevo workshop</button>
+        <button class="ghost-btn" id="syncBtn" type="button">Actualizar inventario desde la planilla</button>
+        <button class="ghost-btn" id="resetBtn" type="button" hidden>Restaurar datos del Excel</button>
+        <p class="sync" id="syncInfo"></p>
+      </div>
     </aside>
-    <main class="main" id="main" tabindex="-1"></main>
+    <main class="main" id="main" tabindex="-1"><div class="loading"><span></span>Cargando inventario…</div></main>
   </div>
 
   <dialog id="dlg"></dialog>

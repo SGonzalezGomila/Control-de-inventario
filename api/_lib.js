@@ -73,4 +73,4 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
-module.exports = { getState, mutate, actions, checkPin, send, HttpError, HAS_REDIS };
+module.exports = { seed, getState, mutate, actions, checkPin, send, HttpError, HAS_REDIS };
