@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventario por WS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="side" id="side">
+      <div class="brand">Inventario Workshops</div>
+      <label class="who">
+        <span>Tu nombre</span>
+        <input id="whoInput" type="text" placeholder="Ej: Gero" autocomplete="name">
+      </label>
+      <label class="who">
+        <span>Mi workshop</span>
+        <select id="myWs"></select>
+      </label>
+      <nav id="nav" aria-label="Workshops"></nav>
+      <button class="ghost-btn" id="newSpaceBtn" type="button">+ Nuevo workshop</button>
+      <button class="ghost-btn" id="syncBtn" type="button">Actualizar inventario desde la planilla</button>
+      <button class="ghost-btn" id="resetBtn" type="button" hidden>Restaurar datos del Excel</button>
+      <p class="sync" id="syncInfo"></p>
+    </aside>
+    <main class="main" id="main" tabindex="-1"></main>
+  </div>
+
+  <dialog id="dlg"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="seed.js"></script>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
