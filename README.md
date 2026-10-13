@@ -11,6 +11,27 @@ Los datos iniciales salen de `Inventario_por_WS_.xlsx` (ya cargados en `public/s
 - "Prestar" (botón secundario) sirve para registrar directo un préstamo que ya se entregó.
 - Si rechazan un pedido, al workshop que lo pidió le aparece el aviso con el motivo.
 
+## Confirmaciones de stock y responsable
+A las **8, 10, 12, 16, 18 y 20 hs (hora de Argentina)** cada workshop tiene que confirmar el stock y quién está a cargo.
+- En la página de cada workshop aparece un cartel azul "Confirmación de las HH:00 pendiente" con el botón para confirmar.
+- La pantalla **Confirmaciones** (menú lateral) muestra todos los workshops por horario del día: OK, Diferencias o Falta.
+- Si hay diferencias de stock hay que escribir cuáles. Todo queda guardado en el Historial.
+- Si elegís "Mi workshop" en el menú, el número rojo de Confirmaciones cuenta solo las de tu workshop.
+- La app avisa solo mientras está abierta: no manda notificaciones al celular ni mails.
+
+## Sumar o quitar unidades
+En la columna **Total** de cada elemento hay botones − y +.
+- **−** quita unidades que ya no están (se perdió, se rompió, se dio de baja). Ej: Teclados 19 → se pierde 1 → 18.
+- **+** suma unidades nuevas (nos dieron nuevos, apareció uno, volvió de reparación). Ej: 18 → llega 1 → 19.
+- Siempre se pide el motivo y queda en el Historial del workshop con quién lo hizo y el total antes y después.
+- No deja quitar unidades que están prestadas o marcadas como faltantes.
+- "Faltan" sigue sirviendo para lo que no está pero se espera que aparezca; "−" es una baja del total.
+
+## Actualizar el inventario desde la planilla
+`public/seed.js` tiene los datos del Excel "Inventario por WS" (cargado el 13/10/2026). Después de subir una versión nueva
+a GitHub, tocá **"Actualizar inventario desde la planilla"** en el menú lateral: trae cantidades, estados, comentarios y responsables
+sin borrar préstamos, pedidos, faltantes ni elementos que hayas agregado a mano.
+
 ## Publicar en Vercel
 1. Subí esta carpeta a un repositorio de GitHub (o usá `vercel` desde la terminal dentro de la carpeta).
 2. En vercel.com → *Add New Project* → importá el repo. Framework: **Other**. No hace falta configurar build.
