@@ -19,6 +19,9 @@ A las **8, 10, 12, 16, 18 y 20 hs (hora de Argentina)** cada workshop tiene que 
 - Si elegís "Mi workshop" en el menú, el número rojo de Confirmaciones cuenta solo las de tu workshop.
 - La app avisa solo mientras está abierta: no manda notificaciones al celular ni mails.
 
+## Cambiar el nombre de un workshop
+Tocá el lápiz al lado del nombre, arriba de la página del workshop. El inventario, los préstamos y el historial no cambian, y "Actualizar inventario desde la planilla" no pisa el nombre nuevo.
+
 ## Sumar o quitar unidades
 En la columna **Total** de cada elemento hay botones − y +.
 - **−** quita unidades que ya no están (se perdió, se rompió, se dio de baja). Ej: Teclados 19 → se pierde 1 → 18.

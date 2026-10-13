@@ -297,3 +297,7 @@ fieldset.field { display: grid; gap: 8px; }
 }
 @keyframes sheet { from { transform: translateY(40px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+.rename { background: none; border: 0; padding: 4px; margin-left: 6px; border-radius: 8px; color: var(--faint); cursor: pointer; vertical-align: middle; line-height: 0; transition: background .15s, color .15s; }
+.rename:hover { background: var(--accent-soft); color: var(--accent-ink); }
+.rename .ic { width: 18px; height: 18px; }

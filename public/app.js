@@ -182,7 +182,7 @@ function viewSpace(s, tab) {
   const news = unseen(s.id);
   const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
   let h = `<div class="head"><div class="title"><span class="mark">${esc(initials(s.name))}</span><div>
-      <h1>${esc(s.name)}</h1>
+      <h1>${esc(s.name)}<button class="rename" data-act="rename" data-id="${s.id}" type="button" title="Cambiar el nombre" aria-label="Cambiar el nombre del workshop">${icon('edit')}</button></h1>
       <div class="owner">Responsable: <b>${s.owner ? esc(s.owner) : 'sin asignar'}</b><button data-act="owner" data-id="${s.id}" type="button">cambiar</button>
         · Último relevamiento: <b>${s.checkedAt ? esc(s.checkedAt) : 'sin fecha'}</b><button data-act="info" data-id="${s.id}" type="button">editar ficha</button></div>
       ${(() => { const c = confs().find((x) => x.spaceId === s.id && x.date === today()); return c ? `<div class="owner">A cargo ahora: <b>${esc(c.owner)}</b> · confirmado a las ${hhmm(c.ts)} (turno de las ${c.slot}:00)${c.stockOk ? '' : ' · <span class="zero">con diferencias de stock</span>'}</div>` : ''; })()}
@@ -506,6 +506,14 @@ function openOwner(spaceId) {
     async (fd) => { await act({ type: 'setOwner', spaceId, owner: fd.get('owner') }); toast('Responsable actualizado.'); });
 }
 
+function openRename(spaceId) {
+  const s = space(spaceId);
+  openDialog(`<h2>Cambiar el nombre</h2>
+    <label class="field"><span>Nombre del workshop</span><input name="name" value="${esc(s.name)}" required maxlength="80" placeholder="Ej: WS 1 - Videojuegos"></label>
+    <p class="hint">El inventario, los préstamos y el historial quedan igual: solo cambia cómo se ve el nombre.</p>${foot('Guardar')}`,
+    async (fd) => { await act({ type: 'renameSpace', spaceId, name: fd.get('name') }); toast('Nombre actualizado.'); });
+}
+
 function openInfo(spaceId) {
   const s = space(spaceId);
   openDialog(`<h2>Ficha de ${esc(s.name)}</h2>
@@ -538,6 +546,7 @@ main.addEventListener('click', (e) => {
   if (d.act === 'owner') openOwner(d.id);
   if (d.act === 'confirm') openConfirm(d.id);
   if (d.act === 'info') openInfo(d.id);
+  if (d.act === 'rename') openRename(d.id);
   if (d.act === 'qty') openQty(d.id, d.item, Number(d.dir));
   if (d.act === 'miss') act({ type: 'setMissing', spaceId: d.id, itemId: d.item, missing: d.to }).catch((x) => toast(x.message, true));
   if (d.act === 'seen') markSeen(d.id);
