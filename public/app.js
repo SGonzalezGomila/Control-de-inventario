@@ -497,7 +497,7 @@ $('newSpaceBtn').addEventListener('click', openNewSpace);
 $('syncBtn').addEventListener('click', async () => {
   if (!confirm('Se traen los cambios de la planilla (cantidades, estados, comentarios y responsables). No se borran préstamos, pedidos ni faltantes. ¿Seguir?')) return;
   try {
-    const r = await act({ type: 'syncSeed', ...(localMode ? { seed: window.SEED } : {}) });
+    const r = await act({ type: 'syncSeed', seed: window.SEED }); // el inventario que trae esta misma versión de la página
     toast(`Inventario actualizado: ${r.updated} modificados, ${r.added} nuevos${r.removed && r.removed.length ? `. Se quitó: ${r.removed.join(', ')}` : ''}.`);
     if (r.kept && r.kept.length) alert('No se quitó ' + r.kept.join(', ') + ' porque tiene préstamos o pedidos sin cerrar. Cerralos y volvé a actualizar.');
   } catch (x) { toast(x.message, true); }
@@ -521,6 +521,7 @@ $('myWs').addEventListener('change', (e) => localStorage.setItem('myWs', e.targe
 $('whoInput').addEventListener('input', (e) => { localStorage.setItem('who', e.target.value.trim()); if (S) renderNav(route()); });
 
 // ---------- Carga y sincronización ----------
+let autoSynced = false;
 async function refresh(silent) {
   if (dlg.open) return; // no pisar lo que la persona está escribiendo
   try {
@@ -528,6 +529,11 @@ async function refresh(silent) {
     const changed = !S || j.rev !== S.rev;
     S = j; initSeen();
     if (changed) { render(); fillMyWs(); }
+    // Si se publicó una versión nueva de los datos, se aplica sola (una vez por visita).
+    if (!autoSynced && window.SEED && S.seedVersion !== window.SEED.version) {
+      autoSynced = true;
+      try { await act({ type: 'syncSeed', seed: window.SEED, auto: true }); fillMyWs(); } catch (e) { /* el botón manual sigue disponible */ }
+    }
   } catch (x) { if (!silent) main.innerHTML = `<div class="alert">${esc(x.message)}</div>`; }
 }
 refresh();

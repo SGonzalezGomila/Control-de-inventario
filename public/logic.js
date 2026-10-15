@@ -281,7 +281,10 @@ const actions = {
         if (Object.keys(next).some((k) => it[k] !== next[k])) { Object.assign(it, next); updated++; }
       }
     }
-    addLog(state, { type: 'sync', by: str(p.by, 80), spaceIds: [], text: `Se actualizó el inventario desde la planilla: ${updated} elementos modificados, ${added} nuevos${newSpaces ? `, ${newSpaces} workshops nuevos` : ''}${removed.length ? `. Se quitaron: ${removed.join(', ')}` : ''}` });
+    state.seedVersion = seed.version || 0;
+    if (updated || added || newSpaces || removed.length) {
+      addLog(state, { type: 'sync', by: str(p.by, 80), spaceIds: [], text: `Se actualizó el inventario desde la planilla${p.auto ? ' (automático)' : ''}: ${updated} elementos modificados, ${added} nuevos${newSpaces ? `, ${newSpaces} workshops nuevos` : ''}${removed.length ? `. Se quitaron: ${removed.join(', ')}` : ''}` });
+    }
     return { added, updated, newSpaces, removed, kept };
   },
   deleteLoan(state, p) {

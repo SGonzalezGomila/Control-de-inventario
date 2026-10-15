@@ -1,6 +1,6 @@
 // Datos iniciales tomados de la planilla de Google Sheets "Inventario por WS" (actualizado el 09/10/2026)
 (function (r) { if (typeof module === 'object' && module.exports) module.exports = r; else window.SEED = r; })({
- "version": 4,
+ "version": 5,
  "rev": 0,
  "spaces": [
   {

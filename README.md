@@ -19,7 +19,11 @@ A las **8, 10, 12, 16, 18 y 20 hs (hora de Argentina)** cada workshop tiene que 
 - Si elegís "Mi workshop" en el menú, el número rojo de Confirmaciones cuenta solo las de tu workshop.
 - La app avisa solo mientras está abierta: no manda notificaciones al celular ni mails.
 
-## Actualizar el inventario desde la planilla
+## Actualización automática
+Cada versión nueva de `public/seed.js` tiene un número de versión. Cuando alguien abre la app y ese número es distinto al de la base de datos,
+la app aplica sola los datos de la planilla (una vez), sin tocar ningún botón. Para actualizar solo hay que subir los archivos a GitHub y abrir la app.
+
+## Actualizar el inventario desde la planilla (manual)
 `public/seed.js` tiene los datos de la planilla de Google Sheets "Inventario por WS" (leída el 09/10/2026). Después de subir una versión nueva
 a GitHub, tocá **"Actualizar inventario desde la planilla"** en el menú lateral: trae cantidades, estados, comentarios y responsables
 sin borrar préstamos, pedidos, faltantes ni elementos que hayas agregado a mano. También quita los workshops que ya no están en la planilla (LL y Stock Cables), salvo que tengan préstamos o pedidos sin cerrar.
