@@ -110,34 +110,6 @@ const actions = {
     it.missing = n;
     addLog(state, { type: 'missing', by: str(p.by, 80), spaceIds: [s.id], text: `${s.name}: ${n ? `faltan ${n} de ${it.name}` : `${it.name} completo (no falta nada)`}` });
   },
-  adjustQty(state, p) {
-    const s = findSpace(state, p.spaceId);
-    const it = findItem(s, p.itemId);
-    const delta = int(p.delta);
-    if (!delta || Math.abs(delta) > 9999) throw new HttpError(400, 'Indicá cuántas unidades se agregan o se quitan.');
-    const reason = str(p.reason, 200);
-    if (!reason) throw new HttpError(400, 'Indicá el motivo.');
-    const next = it.qty + delta;
-    const min = (it.missing || 0) + lentOut(state, it.id);
-    if (next < min) throw new HttpError(400, `Solo se pueden quitar ${it.qty - min}: el resto está prestado o marcado como faltante.`);
-    const before = it.qty;
-    it.qty = next;
-    addLog(state, {
-      type: 'qty', by: str(p.by, 80), spaceIds: [s.id],
-      text: `${s.name}: ${delta > 0 ? `se agregaron ${delta}` : `se quitaron ${-delta}`} × ${it.name} (${reason}). Total: ${before} → ${next}`,
-    });
-    return { qty: next };
-  },
-  renameSpace(state, p) {
-    const s = findSpace(state, p.spaceId);
-    const name = str(p.name, 80);
-    if (!name) throw new HttpError(400, 'Escribí el nombre del workshop.');
-    if (state.spaces.some((x) => x.id !== s.id && x.name.toLowerCase() === name.toLowerCase())) throw new HttpError(400, 'Ya hay un workshop con ese nombre.');
-    if (name === s.name) return;
-    const old = s.name;
-    s.name = name;
-    addLog(state, { type: 'space', by: str(p.by, 80), spaceIds: [s.id], text: `${old} ahora se llama ${name}` });
-  },
   setInfo(state, p) {
     const s = findSpace(state, p.spaceId);
     s.checkedAt = str(p.checkedAt, 40);
@@ -275,6 +247,17 @@ const actions = {
     const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim();
     const key = (i) => norm(i.category) + '|' + norm(i.name);
     let added = 0, updated = 0, newSpaces = 0;
+    const removed = [], kept = [];
+    for (const id of seed.removedSpaces || []) {
+      const sp = state.spaces.find((x) => x.id === id);
+      if (!sp) continue;
+      const busy = state.loans.some((l) => (l.fromSpaceId === id || l.toSpaceId === id) && (l.status === 'pending' || ((l.status || 'active') === 'active' && l.qty - l.returned > 0)));
+      if (busy) { kept.push(sp.name); continue; } // tiene préstamos o pedidos sin cerrar: no se borra
+      state.spaces = state.spaces.filter((x) => x.id !== id);
+      state.loans = state.loans.filter((l) => l.fromSpaceId !== id && l.toSpaceId !== id);
+      state.confirmations = (state.confirmations || []).filter((c) => c.spaceId !== id);
+      removed.push(sp.name);
+    }
     for (const ss of seed.spaces) {
       let sp = state.spaces.find((x) => x.id === ss.id);
       if (!sp) {
@@ -298,8 +281,8 @@ const actions = {
         if (Object.keys(next).some((k) => it[k] !== next[k])) { Object.assign(it, next); updated++; }
       }
     }
-    addLog(state, { type: 'sync', by: str(p.by, 80), spaceIds: [], text: `Se actualizó el inventario desde la planilla: ${updated} elementos modificados, ${added} nuevos${newSpaces ? `, ${newSpaces} workshops nuevos` : ''}` });
-    return { added, updated, newSpaces };
+    addLog(state, { type: 'sync', by: str(p.by, 80), spaceIds: [], text: `Se actualizó el inventario desde la planilla: ${updated} elementos modificados, ${added} nuevos${newSpaces ? `, ${newSpaces} workshops nuevos` : ''}${removed.length ? `. Se quitaron: ${removed.join(', ')}` : ''}` });
+    return { added, updated, newSpaces, removed, kept };
   },
   deleteLoan(state, p) {
     const i = state.loans.findIndex((l) => l.id === p.loanId);

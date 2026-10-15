@@ -1,6 +1,6 @@
-// Datos iniciales tomados del Excel "Inventario por WS" (actualizado el 13/10/2026)
+// Datos iniciales tomados de la planilla de Google Sheets "Inventario por WS" (actualizado el 09/10/2026)
 (function (r) { if (typeof module === 'object' && module.exports) module.exports = r; else window.SEED = r; })({
- "version": 3,
+ "version": 4,
  "rev": 0,
  "spaces": [
   {
@@ -443,7 +443,7 @@
    "id": "ws3",
    "name": "WS 3 - Música",
    "owner": "Paloma",
-   "checkedAt": "10/09/2026",
+   "checkedAt": "09/10",
    "labels": [],
    "items": [
     {
@@ -694,7 +694,7 @@
    "id": "ws4",
    "name": "WS 4 - Programación",
    "owner": "Guido",
-   "checkedAt": "10/09/2026",
+   "checkedAt": "09/10",
    "labels": [],
    "items": [
     {
@@ -869,7 +869,10 @@
    "name": "WS 5 - Diseño Gráfico",
    "owner": "Mariano",
    "checkedAt": "28/04/2026",
-   "labels": [],
+   "labels": [
+    "Mouses: 2 - 9 - 10 - 11 - 12",
+    "Teclados: Ninguno"
+   ],
    "items": [
     {
      "category": "Tecnología",
@@ -896,7 +899,7 @@
     {
      "category": "Tecnología",
      "name": "Monitores",
-     "qty": 19,
+     "qty": 17,
      "needsFix": false,
      "problem": "",
      "comment": "",
@@ -907,7 +910,7 @@
     {
      "category": "Tecnología",
      "name": "Teclados",
-     "qty": 19,
+     "qty": 17,
      "needsFix": false,
      "problem": "",
      "comment": "",
@@ -918,7 +921,7 @@
     {
      "category": "Tecnología",
      "name": "Mouses",
-     "qty": 19,
+     "qty": 17,
      "needsFix": false,
      "problem": "",
      "comment": "",
@@ -1086,7 +1089,7 @@
    "id": "ws6",
    "name": "WS 6 - Animación",
    "owner": "Olivia",
-   "checkedAt": "10/09/2026",
+   "checkedAt": "9/10/2026",
    "labels": [],
    "items": [
     {
@@ -1315,7 +1318,7 @@
    "id": "ws7",
    "name": "WS 7 - Cine",
    "owner": "Oli",
-   "checkedAt": "10/09/2026",
+   "checkedAt": "9/10/2026",
    "labels": [],
    "items": [
     {
@@ -2008,256 +2011,11 @@
      "missing": 0
     }
    ]
-  },
-  {
-   "id": "ll",
-   "name": "LL",
-   "owner": "",
-   "checkedAt": "",
-   "labels": [],
-   "items": [
-    {
-     "category": "Tecnología",
-     "name": "Teclados",
-     "qty": 6,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "link": "",
-     "id": "ll-1",
-     "missing": 0
-    },
-    {
-     "category": "Tecnología",
-     "name": "Mouse mac",
-     "qty": 10,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "link": "",
-     "id": "ll-2",
-     "missing": 0
-    },
-    {
-     "category": "Tecnología",
-     "name": "Cables de mouse",
-     "qty": 9,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "link": "",
-     "id": "ll-3",
-     "missing": 0
-    },
-    {
-     "category": "Mobiliario",
-     "name": "Mouse pad",
-     "qty": 8,
-     "needsFix": false,
-     "problem": "",
-     "comment": "",
-     "link": "",
-     "id": "ll-4",
-     "missing": 0
-    }
-   ]
-  },
-  {
-   "id": "stock-cables",
-   "name": "Stock Cables",
-   "owner": "",
-   "checkedAt": "",
-   "labels": [],
-   "items": [
-    {
-     "category": "Cables",
-     "name": "Cable Adaptador XLR a Jack The Sssnake MXP1015",
-     "qty": 12,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-AXJMXTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
-     "link": "",
-     "id": "stock-cables-1",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Adaptador XLR a Jack The Sssnake FXP1009",
-     "qty": 12,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-AXJFXTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
-     "link": "",
-     "id": "stock-cables-2",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Jack a Mini Jack Laptops y Altavoces The Sssnake YPK2050",
-     "qty": 4,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-AJKPKTM-SU-N-1 · Odoo: 4 · Inventariado: 4",
-     "link": "",
-     "id": "stock-cables-3",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Multicore Analógico XLR The Sssnake SXX8050",
-     "qty": 2,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-MA805TM-SU-N-1 · Odoo: 2 · Inventariado: 2",
-     "link": "",
-     "id": "stock-cables-4",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Multicore Balanceado Hosa DTF803",
-     "qty": 1,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-MBDTFTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
-     "link": "",
-     "id": "stock-cables-5",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Multicore Balanceado Hosa DTM803",
-     "qty": 1,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-MBDTMTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
-     "link": "",
-     "id": "stock-cables-6",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Multicore Balanceado Hosa DTP803",
-     "qty": 1,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-MBDTPTM-SU-N-1 · Odoo: 1 · Inventariado: 1",
-     "link": "",
-     "id": "stock-cables-7",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Interfaz de Audio a Computadora Delock Thunderbolt 3",
-     "qty": 2,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-BOLT3TM-SU-N-1 · Odoo: 2 · Inventariado: 2",
-     "link": "",
-     "id": "stock-cables-8",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable BNC 50Ohm Interfaz de Audio y PreAmp a Master Clock Snake",
-     "qty": 10,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-BNC50TM-SU-N-1 · Odoo: 10 · Inventariado: 10",
-     "link": "",
-     "id": "stock-cables-9",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Óptico The Sssnake Optical Cable 1m",
-     "qty": 2,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-OPT1MTM-SU-N-1 · Odoo: 2 · Inventariado: 2",
-     "link": "",
-     "id": "stock-cables-10",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Jack Instrumentos y Altavoces Pro Snake Speaker Cable Jack 10",
-     "qty": 4,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-JKC10TM-SU-N-1 · Odoo: 4 · Inventariado: 4",
-     "link": "",
-     "id": "stock-cables-11",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Jack Instrumentos y Altavoces The Sssnake SPP2015",
-     "qty": 12,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-JK201TM-SU-N-1 · Odoo: 12 · Inventariado: 12",
-     "link": "",
-     "id": "stock-cables-12",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable Jack para Instrumentos y Altavoces Pro Snake Guitarra a Parlante",
-     "qty": 12,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-JKSGPTM-SU-N-1 · Odoo: 12 · Inventariado: 12",
-     "link": "",
-     "id": "stock-cables-13",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable XLR Micrófonos Micro Cable White Pro Snake TPM 3,0 CC",
-     "qty": 28,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-XLR30TM-SU-N-1 · Odoo: 30 · Inventariado: 28",
-     "link": "",
-     "id": "stock-cables-14",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable XLR Micrófonos Pro Snake TPM 6,0",
-     "qty": 12,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-XLR60TM-SU-N-1 · Odoo: 12 · Inventariado: 12",
-     "link": "",
-     "id": "stock-cables-15",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable XLR Micrófonos The Sssnake SK233-0,9 XLR",
-     "qty": 30,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-XLR09TM-SU-N-1 · Odoo: 30 · Inventariado: 30",
-     "link": "",
-     "id": "stock-cables-16",
-     "missing": 0
-    },
-    {
-     "category": "Cables",
-     "name": "Cable XLR Micrófonos Pro Snake TPM 15,0",
-     "qty": 8,
-     "needsFix": false,
-     "problem": "",
-     "comment": "SKU MA-CAB-XLR15TM-SU-N-1 · Odoo: 8 · Inventariado: 8",
-     "link": "",
-     "id": "stock-cables-17",
-     "missing": 0
-    }
-   ]
   }
+ ],
+ "removedSpaces": [
+  "ll",
+  "stock-cables"
  ],
  "loans": [],
  "log": [],
