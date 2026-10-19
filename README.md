@@ -12,12 +12,19 @@ Los datos iniciales salen de `Inventario_por_WS_.xlsx` (ya cargados en `public/s
 - Si rechazan un pedido, al workshop que lo pidió le aparece el aviso con el motivo.
 
 ## Confirmaciones de stock y responsable
-A las **8, 10, 12, 16, 18 y 20 hs (hora de Argentina)** cada workshop tiene que confirmar el stock y quién está a cargo.
+A las **8:00, 10:00, 12:00, 16:00, 18:00 y 19:40 hs (hora de Argentina)** cada workshop tiene que confirmar el stock y quién está a cargo. Solo puede hacerlo el líder registrado de ese workshop.
 - En la página de cada workshop aparece un cartel azul "Confirmación de las HH:00 pendiente" con el botón para confirmar.
 - La pantalla **Confirmaciones** (menú lateral) muestra todos los workshops por horario del día: OK, Diferencias o Falta.
 - Si hay diferencias de stock hay que escribir cuáles. Todo queda guardado en el Historial.
 - Si elegís "Mi workshop" en el menú, el número rojo de Confirmaciones cuenta solo las de tu workshop.
 - La app avisa solo mientras está abierta: no manda notificaciones al celular ni mails.
+
+## Líderes de workshop y filas fijas
+- Las filas que vienen de la planilla son **fijas**: no se puede editar la cantidad, el nombre ni borrarlas desde la app (solo cambian con la planilla).
+- Cada líder de workshop tiene su **usuario y contraseña**. Solo un líder puede confirmar el stock, marcar faltantes (− / +), agregar elementos propios y editar la ficha **de su workshop** (un usuario puede ser líder de más de un workshop). Cualquiera puede seguir pidiendo y prestando material.
+- Los usuarios los crea quien administra la app: menú lateral → **Administrar usuarios** (pide el código de administración). Ahí se crean usuarios, se les pone una contraseña inicial, se eligen sus workshops, se resetea una contraseña olvidada o se elimina un usuario. Cada persona puede cambiar su propia contraseña desde "Cambiar contraseña".
+- **Obligatorio para crear usuarios:** en Vercel → Settings → Environment Variables agregá `ADMIN_PIN` con un código que solo tengas vos y hacé un Redeploy.
+- Las contraseñas se guardan cifradas y nunca se envían a los navegadores. La sesión dura 30 días en ese navegador. Tras 5 intentos fallidos el usuario se bloquea 10 minutos.
 
 ## Actualización automática
 Cada versión nueva de `public/seed.js` tiene un número de versión. Cuando alguien abre la app y ese número es distinto al de la base de datos,
