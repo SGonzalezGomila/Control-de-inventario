@@ -1,4 +1,5 @@
 // Lógica compartida del backend: almacenamiento (Upstash Redis) y acciones.
+const crypto = require('crypto');
 const seed = require('../public/seed.js');
 const { actions, HttpError } = require('../public/logic.js');
 
@@ -61,6 +62,41 @@ async function mutate(fn) {
   throw new HttpError(409, 'Hubo muchos cambios al mismo tiempo. Probá de nuevo.');
 }
 
+// ---- Usuarios de los líderes: usuario + contraseña, sesión firmada ----
+const SECRET = process.env.AUTH_SECRET || TOKEN || 'inventario-dev-secret';
+const PROTECTED = ['confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
+const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
+const sign = (data) => crypto.createHmac('sha256', SECRET).update(data).digest('hex');
+function makeToken(username) {
+  const body = `${username}.${Date.now() + 30 * 24 * 3600 * 1000}`; // dura 30 días
+  return `${body}.${sign(body)}`;
+}
+// Devuelve el nombre de usuario si el token es válido y no venció.
+function readToken(token) {
+  if (typeof token !== 'string') return null;
+  const [u, exp, sig] = token.split('.');
+  if (!u || !exp || !sig || Number(exp) < Date.now()) return null;
+  const want = sign(`${u}.${exp}`);
+  return sig.length === want.length && crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(want)) ? u : null;
+}
+const hashPass = (pw, salt) => crypto.scryptSync(String(pw), salt, 32).toString('hex');
+function samePass(pw, user) {
+  const a = Buffer.from(hashPass(pw, user ? user.salt : 'sin-usuario'), 'hex');
+  const b = Buffer.from(user ? user.hash : '0'.repeat(64), 'hex');
+  return Boolean(user) && a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+function newPassHash(pw) {
+  const salt = crypto.randomBytes(8).toString('hex');
+  return { salt, hash: hashPass(pw, salt) };
+}
+// Lo que se manda al navegador: nunca usuarios, claves ni intentos fallidos.
+function publicState(state) {
+  const { users, loginFails, leaders, ...rest } = state;
+  const lead = {};
+  Object.values(users || {}).forEach((u) => (u.spaceIds || []).forEach((id) => { (lead[id] = lead[id] || []).push(u.name); }));
+  return { ...rest, leaders: lead, persistent: HAS_REDIS, pinRequired: Boolean(process.env.APP_PIN), adminRequired: Boolean(process.env.ADMIN_PIN) };
+}
+
 function checkPin(req) {
   const pin = process.env.APP_PIN;
   if (pin && req.headers['x-app-pin'] !== pin) throw new HttpError(401, 'PIN incorrecto.');
@@ -73,4 +109,4 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
-module.exports = { seed, getState, mutate, actions, checkPin, send, HttpError, HAS_REDIS };
+module.exports = { crypto, PROTECTED, USERNAME_RE, makeToken, readToken, samePass, newPassHash, publicState, seed, getState, mutate, actions, checkPin, send, HttpError, HAS_REDIS };
