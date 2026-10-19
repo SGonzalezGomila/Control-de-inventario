@@ -1,6 +1,6 @@
 // Datos iniciales tomados de la planilla de Google Sheets "Inventario por WS" (actualizado el 09/10/2026)
 (function (r) { if (typeof module === 'object' && module.exports) module.exports = r; else window.SEED = r; })({
- "version": 5,
+ "version": 6,
  "rev": 0,
  "spaces": [
   {
@@ -19,7 +19,8 @@
      "comment": "El cable HDMI que conecta la televisión con la computadora queda expuesto y colgando, lo que genera un aspecto visual desprolijo y además representa un posible riesgo de seguridad.",
      "link": "",
      "id": "ws1-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -30,7 +31,8 @@
      "comment": "El cable de alimentación de la computadora del profesor se encuentra conectado a un enchufe ubicado cerca de las computadoras de los estudiantes, lo que provoca que frecuentemente sea tocado o desconectado de manera accidental. Sería recomendable reubicar la conexión eléctrica o asegurarla para evitar interrupciones y mejorar la seguridad del espacio. Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "ws1-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -41,7 +43,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -52,7 +55,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -63,7 +67,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -74,7 +79,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -85,7 +91,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -96,7 +103,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -107,7 +115,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -118,7 +127,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -129,7 +139,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -140,7 +151,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -151,7 +163,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -162,7 +175,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -173,7 +187,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -184,7 +199,8 @@
      "comment": "",
      "link": "",
      "id": "ws1-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -204,7 +220,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -215,7 +232,8 @@
      "comment": "1 Mouse roto",
      "link": "",
      "id": "ws2-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -226,7 +244,8 @@
      "comment": "Falta 1 teclado/ durante el mes de octubre tendrán 3 teclados que pertenecen a WSH 1 (n°8,n°9 y n°10)",
      "link": "",
      "id": "ws2-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -237,7 +256,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -248,7 +268,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -259,7 +280,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -270,7 +292,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -281,7 +304,8 @@
      "comment": "Son 3 tipos distitnos. Algunos adaptadores no funcionan muy bien, pero por ahora tenemos",
      "link": "",
      "id": "ws2-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -292,7 +316,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -303,7 +328,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -314,7 +340,8 @@
      "comment": "FALTAN cables. Esto ya se sabe hace tiempo, nunca los tuvimos y no sabemos donde estan. Es un problema porque para nivel 2 necesitamos usar las tables por cable (funcionan mal por bluetooth). En su momento Cande/Mili las habian buscando en deposito y tampoco estaban.",
      "link": "",
      "id": "ws2-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -325,7 +352,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -336,7 +364,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -347,7 +376,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -358,7 +388,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -369,7 +400,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -380,7 +412,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -391,7 +424,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-18",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -402,7 +436,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-19",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -413,7 +448,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-20",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -424,7 +460,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-21",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -435,7 +472,8 @@
      "comment": "",
      "link": "",
      "id": "ws2-22",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -455,7 +493,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -466,7 +505,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -477,7 +517,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -488,7 +529,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -499,7 +541,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -510,7 +553,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -521,7 +565,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -532,7 +577,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -543,7 +589,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -554,7 +601,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -565,7 +613,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -576,7 +625,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -587,7 +637,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -598,7 +649,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -609,7 +661,8 @@
      "comment": "Hay 1 en reparación",
      "link": "",
      "id": "ws3-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -620,7 +673,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -631,7 +685,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -642,7 +697,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-18",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -653,7 +709,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-19",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -664,7 +721,8 @@
      "comment": "",
      "link": "",
      "id": "ws3-20",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -675,7 +733,8 @@
      "comment": "Tenemos 3",
      "link": "",
      "id": "ws3-21",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -686,7 +745,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "ws3-22",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -706,7 +766,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -717,7 +778,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -728,7 +790,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -739,7 +802,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -750,7 +814,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -761,7 +826,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -772,7 +838,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -783,7 +850,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -794,7 +862,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -805,7 +874,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -816,7 +886,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -827,7 +898,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -838,7 +910,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -849,7 +922,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Otros",
@@ -860,7 +934,8 @@
      "comment": "",
      "link": "",
      "id": "ws4-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -883,7 +958,8 @@
      "comment": "Prende y apaga todo sin poder elegir entre los tubos centrales o los de los costados",
      "link": "",
      "id": "ws5-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -894,7 +970,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -905,7 +982,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -916,7 +994,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -927,7 +1006,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -938,7 +1018,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -949,7 +1030,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -960,7 +1042,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -971,7 +1054,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -982,7 +1066,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -993,7 +1078,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1004,7 +1090,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1015,7 +1102,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1026,7 +1114,8 @@
      "comment": "Falta desde el año pasado, que se rompió el sostén y nunca se reparó.",
      "link": "",
      "id": "ws5-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1037,7 +1126,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1048,7 +1138,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1059,7 +1150,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1070,7 +1162,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-18",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1081,7 +1174,8 @@
      "comment": "",
      "link": "",
      "id": "ws5-19",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -1101,7 +1195,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1112,7 +1207,8 @@
      "comment": "Falta un mouse",
      "link": "",
      "id": "ws6-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1123,7 +1219,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1134,7 +1231,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1145,7 +1243,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1156,7 +1255,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1167,7 +1267,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1178,7 +1279,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1189,7 +1291,8 @@
      "comment": "Algunos funcionan mal",
      "link": "",
      "id": "ws6-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1200,7 +1303,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1211,7 +1315,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1222,7 +1327,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1233,7 +1339,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1244,7 +1351,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1255,7 +1363,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1266,7 +1375,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1277,7 +1387,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1288,7 +1399,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-18",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1299,7 +1411,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-19",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1310,7 +1423,8 @@
      "comment": "",
      "link": "",
      "id": "ws6-20",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -1330,7 +1444,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1341,7 +1456,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1352,7 +1468,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1363,7 +1480,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1374,7 +1492,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1385,7 +1504,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1396,7 +1516,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1407,7 +1528,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1418,7 +1540,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Librería",
@@ -1429,7 +1552,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1440,7 +1564,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1451,7 +1576,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1462,7 +1588,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1473,7 +1600,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1484,7 +1612,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1495,7 +1624,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1506,7 +1636,8 @@
      "comment": "",
      "link": "",
      "id": "ws7-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -1526,7 +1657,8 @@
      "comment": "",
      "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1537,7 +1669,8 @@
      "comment": "Estado: Good",
      "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1548,7 +1681,8 @@
      "comment": "",
      "link": "https://www.mercadolibre.com.ar/placa-de-microcontrolador-arduino-mkr-wifi-1010-abx00023/p/MLA32626153",
      "id": "ws8-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1559,7 +1693,8 @@
      "comment": "Estado: Good",
      "link": "",
      "id": "ws8-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1570,7 +1705,8 @@
      "comment": "",
      "link": "",
      "id": "ws8-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1581,7 +1717,8 @@
      "comment": "Estado: Good",
      "link": "https://www.mercadolibre.com.ar/protoboard-de-400-puntos-experimentador-arduino-en-belgrano/p/MLA2089243318",
      "id": "ws8-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1592,7 +1729,8 @@
      "comment": "Estado: Good",
      "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351",
      "id": "ws8-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1603,7 +1741,8 @@
      "comment": "",
      "link": "https://www.mercadolibre.com.ar/fuente-alimentacion-protoboard-5v-33v-compatible-arduino/up/MLAU213367351",
      "id": "ws8-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1614,7 +1753,8 @@
      "comment": "Estado: Good",
      "link": "https://www.mercadolibre.com.ar/mini-bomba-de-agua-sumergible-3v-5v-dc/p/MLA2040186010",
      "id": "ws8-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1625,7 +1765,8 @@
      "comment": "",
      "link": "",
      "id": "ws8-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1636,7 +1777,8 @@
      "comment": "Estado: Good",
      "link": "",
      "id": "ws8-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   },
@@ -1656,7 +1798,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-1",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1667,7 +1810,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-2",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1678,7 +1822,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-3",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1689,7 +1834,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-4",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1700,7 +1846,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-5",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1711,7 +1858,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-6",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1722,7 +1870,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-7",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Mobiliario",
@@ -1733,7 +1882,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-8",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1744,7 +1894,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-9",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1755,7 +1906,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-10",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1766,7 +1918,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-11",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1777,7 +1930,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-12",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1788,7 +1942,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-13",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1799,7 +1954,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-14",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1810,7 +1966,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-15",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1821,7 +1978,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-16",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1832,7 +1990,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-17",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1843,7 +2002,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-18",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1854,7 +2014,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-19",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1865,7 +2026,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-20",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1876,7 +2038,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-21",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1887,7 +2050,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-22",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1898,7 +2062,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-23",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1909,7 +2074,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-24",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1920,7 +2086,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-25",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1931,7 +2098,8 @@
      "comment": "Cantidad sin cargar en la planilla.",
      "link": "",
      "id": "estudio-musica-26",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1942,7 +2110,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-27",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Herramientas",
@@ -1953,7 +2122,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-28",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1964,7 +2134,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-29",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1975,7 +2146,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-30",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1986,7 +2158,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-31",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -1997,7 +2170,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-32",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     },
     {
      "category": "Tecnología",
@@ -2008,7 +2182,8 @@
      "comment": "",
      "link": "",
      "id": "estudio-musica-33",
-     "missing": 0
+     "missing": 0,
+     "preset": true
     }
    ]
   }

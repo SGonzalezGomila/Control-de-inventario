@@ -147,3 +147,11 @@ table th:first-child, table td:first-child { width: 40%; min-width: 260px; }
 .ck.none { color: var(--muted); }
 fieldset.field { display: grid; gap: 6px; }
 [hidden] { display: none !important; }
+
+.lock { display: inline-block; font-size: 13px; color: var(--muted); border: 1px dashed var(--line); border-radius: 6px; padding: 3px 9px; }
+
+.sess { background: #1c2f44; border: 1px solid #2d4560; border-radius: 8px; padding: 8px 10px; color: #fff; display: grid; gap: 4px; }
+.sess .sub2 { font-size: 12px; color: #8ea3b8; }
+.sess button { background: none; border: 0; color: #9ec0ff; cursor: pointer; text-align: left; padding: 0; text-decoration: underline; }
+#session { padding: 0 8px; }
+#session .ghost-btn { width: 100%; }

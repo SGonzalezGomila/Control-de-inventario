@@ -29,7 +29,9 @@ function findItem(space, id) {
 }
 const pending = (l) => l.qty - l.returned;
 const TZ = 'America/Argentina/Buenos_Aires';
-const SLOTS = [8, 10, 12, 16, 18, 20]; // horarios de confirmación (hora de Argentina)
+const SLOTS = [480, 600, 720, 960, 1080, 1180]; // horarios de confirmación en minutos desde las 00:00 (8:00, 10:00, 12:00, 16:00, 18:00 y 19:40, hora de Argentina)
+const slotMin = (v) => (v < 24 ? v * 60 : v); // las confirmaciones viejas guardaban solo la hora
+const fmtSlot = (m) => `${Math.floor(slotMin(m) / 60)}:${String(slotMin(m) % 60).padStart(2, '0')}`;
 function arParts(ts) {
   const f = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
   const o = {};
@@ -38,9 +40,10 @@ function arParts(ts) {
 }
 // Horario de confirmación vigente: el último que ya empezó hoy (null antes de las 8:00).
 function currentSlot(ts = Date.now()) {
-  const { date, hour } = arParts(ts);
+  const { date, hour, minute } = arParts(ts);
+  const now = hour * 60 + minute;
   let slot = null;
-  SLOTS.forEach((h) => { if (hour >= h) slot = h; });
+  SLOTS.forEach((m) => { if (now >= m) slot = m; });
   return slot === null ? null : { date, slot };
 }
 const isActive = (l) => (l.status || 'active') === 'active';
@@ -95,6 +98,7 @@ const actions = {
   updateItem(state, p) {
     const s = findSpace(state, p.spaceId);
     const it = findItem(s, p.itemId);
+    if (it.preset) throw new HttpError(400, 'Este elemento viene de la planilla y no se puede editar. Solo se pueden marcar faltantes.');
     const next = cleanItem(p.patch || {}, it);
     const out = lentOut(state, it.id);
     if (next.qty - next.missing < out) throw new HttpError(400, `Hay ${out} prestados: la cantidad en el WS no puede ser menor.`);
@@ -119,6 +123,7 @@ const actions = {
   deleteItem(state, p) {
     const s = findSpace(state, p.spaceId);
     const it = findItem(s, p.itemId);
+    if (it.preset) throw new HttpError(400, 'Este elemento viene de la planilla y no se puede eliminar.');
     if (lentOut(state, it.id) > 0) throw new HttpError(400, 'Ese elemento tiene préstamos sin devolver.');
     state.loans.forEach((l) => { if (l.itemId === it.id && l.status === 'pending') l.status = 'cancelled'; });
     s.items = s.items.filter((x) => x.id !== it.id);
@@ -231,13 +236,13 @@ const actions = {
     const stockOk = p.stockOk === true || p.stockOk === 'true';
     const note = str(p.note, 500);
     if (!stockOk && !note) throw new HttpError(400, 'Contá qué diferencia hay en el stock.');
-    state.confirmations = (state.confirmations || []).filter((c) => !(c.spaceId === s.id && c.date === cur.date && c.slot === cur.slot));
+    state.confirmations = (state.confirmations || []).filter((c) => !(c.spaceId === s.id && c.date === cur.date && slotMin(c.slot) === cur.slot));
     const by = str(p.by, 80) || owner;
     state.confirmations.unshift({ id: uid(), spaceId: s.id, date: cur.date, slot: cur.slot, owner, stockOk, note, by, ts: Date.now() });
     state.confirmations = state.confirmations.slice(0, 800);
     addLog(state, {
       type: 'check', by, spaceIds: [s.id],
-      text: `${s.name}: confirmación de las ${cur.slot}:00. A cargo: ${owner}. Stock ${stockOk ? 'completo' : `con diferencias (${note})`}`,
+      text: `${s.name}: confirmación de las ${fmtSlot(cur.slot)}. A cargo: ${owner}. Stock ${stockOk ? 'completo' : `con diferencias (${note})`}`,
     });
     return { date: cur.date, slot: cur.slot };
   },
@@ -272,10 +277,11 @@ const actions = {
       for (const si of ss.items) {
         const it = sp.items.find((x) => !used.has(x.id) && key(x) === key(si));
         if (!it) {
-          sp.items.push({ id: uid(), name: si.name, category: si.category, qty: si.qty, missing: 0, needsFix: si.needsFix, problem: si.problem, comment: si.comment, link: si.link || '' });
+          sp.items.push({ id: uid(), name: si.name, category: si.category, qty: si.qty, missing: 0, needsFix: si.needsFix, problem: si.problem, comment: si.comment, link: si.link || '', preset: true });
           added++; continue;
         }
         used.add(it.id);
+        if (!it.preset) { it.preset = true; updated++; }
         const minQty = lentOut(state, it.id) + (it.missing || 0);
         const next = { qty: Math.max(si.qty, minQty), needsFix: si.needsFix, problem: si.problem, comment: si.comment, link: si.link || '' };
         if (Object.keys(next).some((k) => it[k] !== next[k])) { Object.assign(it, next); updated++; }
@@ -305,5 +311,5 @@ function applyAction(state, body) {
   return result;
 }
 
-return { actions, HttpError, applyAction, SLOTS, arParts, currentSlot };
+return { actions, HttpError, applyAction, SLOTS, arParts, currentSlot, fmtSlot, slotMin };
 });

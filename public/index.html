@@ -17,12 +17,14 @@
         <span>Tu nombre</span>
         <input id="whoInput" type="text" placeholder="Ej: Gero" autocomplete="name">
       </label>
+      <div id="session"></div>
       <label class="who">
         <span>Mi workshop</span>
         <select id="myWs"></select>
       </label>
       <nav id="nav" aria-label="Workshops"></nav>
       <button class="ghost-btn" id="newSpaceBtn" type="button">+ Nuevo workshop</button>
+      <button class="ghost-btn" id="adminBtn" type="button" hidden>Administrar usuarios</button>
       <button class="ghost-btn" id="syncBtn" type="button">Actualizar inventario desde la planilla</button>
       <button class="ghost-btn" id="resetBtn" type="button" hidden>Restaurar datos del Excel</button>
       <p class="sync" id="syncInfo"></p>

@@ -16,7 +16,7 @@ const lentOut = (itemId) => S.loans.filter((l) => l.itemId === itemId && isActiv
 const available = (it) => it.qty - (it.missing || 0) - lentOut(it.id);
 const activeLoans = () => S.loans.filter((l) => isActive(l) && pending(l) > 0);
 const confs = () => S.confirmations || [];
-const confFor = (spaceId, date, slot) => confs().find((c) => c.spaceId === spaceId && c.date === date && c.slot === slot);
+const confFor = (spaceId, date, slot) => confs().find((c) => c.spaceId === spaceId && c.date === date && InvLogic.slotMin(c.slot) === slot);
 const hhmm = (ts) => new Date(ts).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Argentina/Buenos_Aires' });
 const today = () => InvLogic.arParts(Date.now()).date;
 const checkable = () => S.spaces.filter((x) => x.items.length);
@@ -25,6 +25,12 @@ function pendingChecks(spaceId) { // confirmaciones que faltan en el horario vig
   if (!cur) return [];
   return checkable().filter((x) => (!spaceId || x.id === spaceId) && !confFor(x.id, cur.date, cur.slot));
 }
+const PROTECTED = ['confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
+const SK = 'session';
+const session = () => { try { const x = JSON.parse(localStorage.getItem(SK) || 'null'); return x && Number(x.token.split('.')[1]) > Date.now() ? x : null; } catch (e) { return null; } };
+const setSession = (x) => { if (x) localStorage.setItem(SK, JSON.stringify({ token: x.token, username: x.username, name: x.name, spaceIds: x.spaceIds })); else localStorage.removeItem(SK); };
+const isLeader = (id) => localMode || Boolean(session() && session().spaceIds.includes(id)); // en modo local no hay servidor que pida usuario
+const leadersOf = (id) => ((S && S.leaders) || {})[id] || [];
 const requestsFor = (spaceId) => S.loans.filter((l) => pendingReq(l) && l.fromSpaceId === spaceId);
 const who = () => localStorage.getItem('who') || '';
 
@@ -121,6 +127,7 @@ function render() {
       ? 'Se sincroniza solo cada pocos segundos.'
       : 'Modo prueba: los datos no se guardan al reiniciar el servidor.';
   $('resetBtn').hidden = !S.local;
+  renderSession();
   const mine = myWs();
   const n = (mine ? requestsFor(mine).length + pendingChecks(mine).length : 0);
   document.title = (n ? `(${n}) ` : '') + 'Inventario Workshops';
@@ -152,9 +159,10 @@ function viewSpace(s, tab) {
   const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
   let h = `<div class="head"><div>
       <h1>${esc(s.name)}</h1>
-      <div class="owner">Responsable: <b>${s.owner ? esc(s.owner) : 'sin asignar'}</b><button data-act="owner" data-id="${s.id}" type="button">cambiar</button>
-        · Último relevamiento: <b>${s.checkedAt ? esc(s.checkedAt) : 'sin fecha'}</b><button data-act="info" data-id="${s.id}" type="button">editar ficha</button></div>
-      ${(() => { const c = confs().find((x) => x.spaceId === s.id && x.date === today()); return c ? `<div class="owner">A cargo ahora: <b>${esc(c.owner)}</b> · confirmado a las ${hhmm(c.ts)} (turno de las ${c.slot}:00)${c.stockOk ? '' : ' · <span class="zero">con diferencias de stock</span>'}</div>` : ''; })()}
+      <div class="owner">Responsable: <b>${s.owner ? esc(s.owner) : 'sin asignar'}</b>${isLeader(s.id) ? `<button data-act="owner" data-id="${s.id}" type="button">cambiar</button>` : ''}
+        · Último relevamiento: <b>${s.checkedAt ? esc(s.checkedAt) : 'sin fecha'}</b>${isLeader(s.id) ? `<button data-act="info" data-id="${s.id}" type="button">editar ficha</button>` : ''}</div>
+      ${localMode ? '' : `<div class="owner">Líder del workshop: <b>${leadersOf(s.id).length ? esc(leadersOf(s.id).join(', ')) : 'sin usuario asignado'}</b>${session() && !isLeader(s.id) ? ' · <span class="zero">tu usuario no es líder de este workshop</span>' : ''}${!session() ? '<button data-act="login" type="button">Ingresar</button>' : ''}</div>`}
+      ${(() => { const c = confs().find((x) => x.spaceId === s.id && x.date === today()); return c ? `<div class="owner">A cargo ahora: <b>${esc(c.owner)}</b> · confirmado a las ${hhmm(c.ts)} (turno de las ${InvLogic.fmtSlot(c.slot)})${c.stockOk ? '' : ' · <span class="zero">con diferencias de stock</span>'}</div>` : ''; })()}
     </div>
     <div class="stats">
       <div class="stat"><b>${s.items.length}</b><span>elementos</span></div>
@@ -166,8 +174,8 @@ function viewSpace(s, tab) {
     ${(s.labels || []).length ? `<details class="labels"><summary>Etiquetas faltantes (${s.labels.length})</summary><ul>${s.labels.map((l) => `<li>${esc(l)}</li>`).join('')}</ul></details>` : ''}`;
   const cur = InvLogic.currentSlot();
   if (cur && s.items.length && !confFor(s.id, cur.date, cur.slot)) {
-    h += `<div class="alert req"><div class="row"><strong>Confirmación de las ${cur.slot}:00 pendiente</strong>
-      <button class="btn" data-act="confirm" data-id="${s.id}" type="button">Confirmar stock y responsable</button></div>
+    h += `<div class="alert req"><div class="row"><strong>Confirmación de las ${InvLogic.fmtSlot(cur.slot)} pendiente</strong>
+      <button class="btn" data-act="confirm" data-id="${s.id}" type="button">${session() || localMode ? 'Confirmar stock y responsable' : 'Ingresar y confirmar'}</button></div>
       <div class="hint">Confirmá que el stock está completo y quién está a cargo del workshop en este horario.</div></div>`;
   }
   const reqs = requestsFor(s.id);
@@ -193,7 +201,7 @@ function stockTable(s) {
   let h = `<div class="toolbar">
       <input type="search" id="filter" placeholder="Buscar elemento o categoría" value="${esc(filterText)}" aria-label="Buscar">
       <button class="btn" data-act="request" data-to="${s.id}" type="button">Pedir material a otro workshop</button>
-      <button class="btn sec" data-act="addItem" data-id="${s.id}" type="button">+ Agregar elemento</button>
+      ${isLeader(s.id) ? `<button class="btn sec" data-act="addItem" data-id="${s.id}" type="button">+ Agregar elemento</button>` : ''}
       <button class="btn sec" data-act="lend" data-from="${s.id}" type="button">Prestar directo</button>
     </div>`;
   if (!items.length) return h + `<div class="table-wrap"><div class="empty">${s.items.length ? 'Ningún elemento coincide con la búsqueda.' : 'Este workshop todavía no tiene elementos. Agregá el primero.'}</div></div>`;
@@ -205,14 +213,14 @@ function stockTable(s) {
         ${S.loans.filter((l) => pendingReq(l) && l.itemId === i.id).map((l) => `<div class="sub reqnote">Pedido pendiente: ${l.qty} para ${esc(space(l.toSpaceId)?.name || '?')} (${esc(l.person)})</div>`).join('')}
         ${loans.map((l) => `<div class="loanchip"><span>Prestado: <b>${pending(l)}</b> → <b>${esc(space(l.toSpaceId)?.name || '?')}</b> · lo llevó <b>${esc(l.person)}</b> · ${fmt(l.createdAt)}${l.acceptedBy ? ` · aceptó ${esc(l.acceptedBy)}` : ''}${l.note ? ` · ${esc(l.note)}` : ''}</span><button class="btn sm sec" data-act="return" data-loan="${l.id}" type="button">Devolver</button></div>`).join('')}</td>
       <td class="num">${i.qty - miss}${miss ? `<div class="sub">de ${i.qty}</div>` : ''}</td>
-      <td class="num"><div class="stepper"><button type="button" aria-label="Menos faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss - 1}" ${miss <= 0 ? 'disabled' : ''}>−</button><b class="${miss ? 'zero' : ''}">${miss}</b><button type="button" aria-label="Más faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss + 1}" ${miss >= i.qty - out ? 'disabled' : ''}>+</button></div></td>
+      <td class="num">${!isLeader(s.id) ? `<b class="${miss ? 'zero' : ''}" title="Solo el líder del workshop puede marcar faltantes">${miss}</b>` : `<div class="stepper"><button type="button" aria-label="Menos faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss - 1}" ${miss <= 0 ? 'disabled' : ''}>−</button><b class="${miss ? 'zero' : ''}">${miss}</b><button type="button" aria-label="Más faltantes" data-act="miss" data-id="${s.id}" data-item="${i.id}" data-to="${miss + 1}" ${miss >= i.qty - out ? 'disabled' : ''}>+</button></div>`}</td>
       <td class="num ${out ? 'out' : ''}">${out || '–'}</td>
       <td class="num ${here === 0 ? 'zero' : ''}">${here}</td>
       <td>${i.needsFix ? `<span class="fix">Arreglar</span>${i.problem ? `<div class="sub">${esc(i.problem)}</div>` : ''}` : `<span class="okk">OK</span>${i.problem ? `<div class="sub">${esc(i.problem)}</div>` : ''}`}</td>
       <td><div class="acts">
         <button class="btn sm" data-act="request" data-from="${s.id}" data-item="${i.id}" type="button" ${here > 0 ? '' : 'disabled'}>Pedir</button>
         <button class="btn sm sec" data-act="lend" data-from="${s.id}" data-item="${i.id}" type="button" ${here > 0 ? '' : 'disabled'}>Prestar</button>
-        <button class="btn sm sec" data-act="editItem" data-id="${s.id}" data-item="${i.id}" type="button">Editar</button>
+        ${i.preset ? '<span class="lock" title="Viene de la planilla: no se puede editar">Fija</span>' : isLeader(s.id) ? `<button class="btn sm sec" data-act="editItem" data-id="${s.id}" data-item="${i.id}" type="button">Editar</button>` : ''}
       </div></td></tr>`;
   }
   h += '</tbody></table></div>';
@@ -279,8 +287,8 @@ function viewChecks() {
     return '<span class="ck miss">Falta</span>';
   };
   return `<div class="head"><div><h1>Confirmaciones de hoy</h1>
-      <div class="owner">Cada workshop confirma el stock y quién está a cargo a las ${InvLogic.SLOTS.join(', ')} hs (hora de Argentina).</div></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Workshop</th>${InvLogic.SLOTS.map((h) => `<th>${h}:00</th>`).join('')}</tr></thead><tbody>
+      <div class="owner">Cada workshop confirma el stock y quién está a cargo a las ${InvLogic.SLOTS.map(InvLogic.fmtSlot).join(', ')} hs (hora de Argentina).</div></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Workshop</th>${InvLogic.SLOTS.map((h) => `<th>${InvLogic.fmtSlot(h)}</th>`).join('')}</tr></thead><tbody>
     ${checkable().map((s) => `<tr><td><a href="#/ws/${s.id}">${esc(s.name)}</a></td>${InvLogic.SLOTS.map((h) => `<td>${cell(s, h)}</td>`).join('')}</tr>`).join('')}
     </tbody></table></div>
     <p class="hint">Las confirmaciones quedan guardadas con fecha, hora, responsable y estado del stock, y también aparecen en el Historial de cada workshop.</p>`;
@@ -300,9 +308,16 @@ function viewAllLoans() {
 
 // ---------- Acciones contra el servidor ----------
 async function act(payload) {
-  const j = await api('/api/action', { ...payload, by: who() });
-  S = j; initSeen(); render();
-  return j.result;
+  const body = { ...payload, by: who() };
+  if (!localMode && PROTECTED.includes(payload.type) && session()) body.token = session().token;
+  try {
+    const j = await api('/api/action', body);
+    S = j; initSeen(); render();
+    return j.result;
+  } catch (e) {
+    if (/ingresar con tu usuario/.test(e.message)) { setSession(null); render(); }
+    throw e;
+  }
 }
 
 // ---------- Diálogos ----------
@@ -377,9 +392,9 @@ function openConfirm(spaceId) {
   const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
   const out = activeLoans().filter((l) => l.fromSpaceId === s.id).reduce((a, l) => a + pending(l), 0);
   const prev = confFor(s.id, cur.date, cur.slot);
-  const form = openDialog(`<h2>Confirmación de las ${cur.slot}:00</h2>
+  const form = openDialog(`<h2>Confirmación de las ${InvLogic.fmtSlot(cur.slot)}</h2>
     <p><b>${esc(s.name)}</b><br><span class="hint">${s.items.length} elementos · ${miss} unidades marcadas como faltantes · ${out} prestadas afuera</span></p>
-    <label class="field"><span>¿Quién está a cargo del workshop ahora?</span><input name="owner" value="${esc(prev?.owner || who() || s.owner)}" maxlength="80" required placeholder="Nombre"></label>
+    <label class="field"><span>¿Quién está a cargo del workshop ahora?</span><input name="owner" value="${esc(prev?.owner || (session() && session().name) || who() || s.owner)}" maxlength="80" required placeholder="Nombre"></label>
     <fieldset class="field" style="border:0;padding:0;margin:0"><span>¿El stock coincide con lo que figura en la página?</span>
       <label class="check"><input type="radio" name="stock" value="yes" required ${prev && prev.stockOk ? 'checked' : ''}> Sí, está completo y coincide</label>
       <label class="check"><input type="radio" name="stock" value="no" ${prev && !prev.stockOk ? 'checked' : ''}> No, hay diferencias</label></fieldset>
@@ -389,12 +404,98 @@ function openConfirm(spaceId) {
     async (fd) => {
       localStorage.setItem('who', fd.get('owner') || who());
       await act({ type: 'confirmSlot', spaceId, owner: fd.get('owner'), stockOk: fd.get('stock') === 'yes', note: fd.get('note') });
-      toast(`Confirmación de las ${cur.slot}:00 registrada.`);
+      toast(`Confirmación de las ${InvLogic.fmtSlot(cur.slot)} registrada.`);
     });
   const box = form.querySelector('#noteBox');
   const sync = () => { box.hidden = form.querySelector('[name=stock]:checked')?.value !== 'no'; };
   form.querySelectorAll('[name=stock]').forEach((r) => r.addEventListener('change', sync));
   sync();
+}
+
+function openLogin(after) {
+  openDialog(`<h2>Ingresar</h2>
+    <p class="hint">Cada líder de workshop tiene su usuario y contraseña. Si todavía no tenés, pedíselos a quien administra la app.</p>
+    <label class="field"><span>Usuario</span><input name="username" autocomplete="username" autocapitalize="none" required></label>
+    <label class="field"><span>Contraseña</span><input name="password" type="password" autocomplete="current-password" required></label>
+    ${foot('Ingresar')}`,
+    async (fd) => {
+      const j = await api('/api/auth', { type: 'login', username: fd.get('username'), password: fd.get('password') });
+      setSession(j); localStorage.setItem('who', j.name); $('whoInput').value = j.name;
+      S = { ...S, ...j, result: undefined }; render();
+      toast(`Ingresaste como ${j.name}.`);
+      if (after) setTimeout(after, 60);
+    });
+}
+
+function openChangePassword() {
+  const me = session();
+  openDialog(`<h2>Cambiar mi contraseña</h2><p class="hint">Usuario: ${esc(me.username)}</p>
+    <label class="field"><span>Contraseña actual</span><input name="old" type="password" autocomplete="current-password" required></label>
+    <label class="field"><span>Contraseña nueva (mínimo 6 caracteres)</span><input name="pw" type="password" minlength="6" autocomplete="new-password" required></label>
+    ${foot('Cambiar contraseña')}`,
+    async (fd) => {
+      const j = await api('/api/auth', { type: 'changePassword', token: me.token, oldPassword: fd.get('old'), newPassword: fd.get('pw') });
+      setSession(j); S = { ...S, ...j }; toast('Contraseña actualizada.');
+    });
+}
+
+// ---- administración de usuarios (con el código ADMIN_PIN) ----
+function openAdminCode() {
+  if (!S.adminRequired) { alert('Para administrar usuarios hay que configurar la variable ADMIN_PIN en Vercel (Settings → Environment Variables) y hacer un Redeploy.'); return; }
+  openDialog(`<h2>Administrar usuarios</h2>
+    <label class="field"><span>Código de administración</span><input name="code" type="password" required autocomplete="off"></label>${foot('Entrar')}`,
+    async (fd) => {
+      const code = fd.get('code');
+      const j = await api('/api/auth', { type: 'admin', op: 'list', adminPin: code });
+      setTimeout(() => openAdmin(code, j.users), 60);
+    });
+}
+function openAdmin(code, users) {
+  const call = async (body) => api('/api/auth', { type: 'admin', adminPin: code, ...body });
+  const reopen = (j) => { S = { ...S, leaders: j.leaders || S.leaders }; render(); dlg.close(); setTimeout(() => openAdmin(code, j.users), 60); };
+  const checks = (sel) => S.spaces.map((x) => `<label class="check"><input type="checkbox" name="sp" value="${esc(x.id)}" ${sel.includes(x.id) ? 'checked' : ''}> ${esc(x.name)}</label>`).join('');
+  const form = openDialog(`<h2>Usuarios de líderes</h2>
+    ${users.length ? `<div class="table-wrap"><table style="min-width:0"><thead><tr><th>Usuario</th><th>Workshops</th><th></th></tr></thead><tbody>
+      ${users.map((u) => `<tr><td><b>${esc(u.username)}</b><div class="sub">${esc(u.name)}</div></td><td>${esc(u.spaceIds.map((id) => space(id)?.name || id).join(', '))}</td>
+        <td><div class="acts"><button class="btn sm sec" type="button" data-pw="${esc(u.username)}">Nueva contraseña</button><button class="btn sm sec" type="button" data-ws="${esc(u.username)}">Workshops</button><button class="btn sm danger" type="button" data-del="${esc(u.username)}">Eliminar</button></div></td></tr>`).join('')}
+      </tbody></table></div>` : '<p class="hint">Todavía no hay usuarios. Creá el primero abajo.</p>'}
+    <h3>Crear usuario</h3>
+    <div class="two"><label class="field"><span>Usuario</span><input name="username" autocapitalize="none" required placeholder="ej: gero" pattern="[A-Za-z0-9_-]{3,30}"></label>
+    <label class="field"><span>Nombre de la persona</span><input name="name" required maxlength="80"></label></div>
+    <label class="field"><span>Contraseña inicial (mínimo 6 caracteres)</span><input name="password" type="text" minlength="6" required autocomplete="off"><span class="hint">Pasásela a la persona; después puede cambiarla ella misma.</span></label>
+    <fieldset class="field" style="border:0;padding:0;margin:0"><span>Es líder de</span>${checks([])}</fieldset>
+    <div class="err" role="alert"></div><div class="foot"><button class="btn sec" type="button" data-close>Cerrar</button><button class="btn" type="submit">Crear usuario</button></div>`,
+    async (fd) => {
+      const j = await call({ op: 'create', username: fd.get('username'), name: fd.get('name'), password: fd.get('password'), spaceIds: fd.getAll('sp') });
+      toast('Usuario creado.'); reopen(j);
+    });
+  form.addEventListener('click', async (e) => {
+    const t = e.target;
+    try {
+      if (t.dataset.pw) { const pw = prompt(`Nueva contraseña para ${t.dataset.pw} (mínimo 6 caracteres):`); if (pw) { await call({ op: 'resetPassword', username: t.dataset.pw, password: pw }); toast('Contraseña actualizada.'); } }
+      if (t.dataset.del && confirm(`¿Eliminar el usuario ${t.dataset.del}?`)) reopen(await call({ op: 'delete', username: t.dataset.del }));
+      if (t.dataset.ws) {
+        const u = users.find((x) => x.username === t.dataset.ws);
+        const cur = u.spaceIds.map((id) => space(id)?.name || id).join(', ');
+        const txt = prompt(`Workshops de ${u.username} (separados por coma, usando el número: 1, 2, 3, 4, 5, 6, 7, 8, estudio).\nHoy: ${cur}`, '');
+        if (txt) {
+          const ids = txt.split(',').map((v) => v.trim().toLowerCase()).filter(Boolean).map((v) => (/^\d+$/.test(v) ? 'ws' + v : v));
+          reopen(await call({ op: 'setSpaces', username: u.username, spaceIds: ids.map((v) => (v === 'estudio' ? 'estudio-musica' : v)) }));
+        }
+      }
+    } catch (x) { form.querySelector('.err').textContent = x.message; }
+  });
+}
+
+function renderSession() {
+  const el = $('session');
+  if (localMode || !S) { el.innerHTML = ''; $('adminBtn').hidden = true; return; }
+  const me = session();
+  $('adminBtn').hidden = false;
+  el.innerHTML = me
+    ? `<div class="who"><span>Sesión</span><div class="sess"><b>${esc(me.name)}</b><div class="sub2">usuario: ${esc(me.username)}</div>
+        <button type="button" data-s="pw">Cambiar contraseña</button><button type="button" data-s="out">Salir</button></div></div>`
+    : '<button class="ghost-btn" type="button" data-s="in">Ingresar como líder</button>';
 }
 
 function openReject(loanId) {
@@ -481,7 +582,11 @@ main.addEventListener('click', (e) => {
   if (d.act === 'addItem') openItem(d.id);
   if (d.act === 'editItem') openItem(d.id, d.item);
   if (d.act === 'owner') openOwner(d.id);
-  if (d.act === 'confirm') openConfirm(d.id);
+  if (d.act === 'confirm') {
+    const go = () => (isLeader(d.id) ? openConfirm(d.id) : toast('Tu usuario no es líder de este workshop.', true));
+    if (session() || localMode) go(); else openLogin(go);
+  }
+  if (d.act === 'login') openLogin();
   if (d.act === 'info') openInfo(d.id);
   if (d.act === 'miss') act({ type: 'setMissing', spaceId: d.id, itemId: d.item, missing: d.to }).catch((x) => toast(x.message, true));
   if (d.act === 'seen') markSeen(d.id);
@@ -494,6 +599,13 @@ main.addEventListener('input', (e) => {
   const f = $('filter'); f.focus(); f.setSelectionRange(pos, pos);
 });
 $('newSpaceBtn').addEventListener('click', openNewSpace);
+$('adminBtn').addEventListener('click', openAdminCode);
+$('session').addEventListener('click', (e) => {
+  const k = e.target.dataset.s;
+  if (k === 'in') openLogin();
+  if (k === 'pw') openChangePassword();
+  if (k === 'out') { setSession(null); render(); toast('Saliste de tu sesión.'); }
+});
 $('syncBtn').addEventListener('click', async () => {
   if (!confirm('Se traen los cambios de la planilla (cantidades, estados, comentarios y responsables). No se borran préstamos, pedidos ni faltantes. ¿Seguir?')) return;
   try {
@@ -521,7 +633,7 @@ $('myWs').addEventListener('change', (e) => localStorage.setItem('myWs', e.targe
 $('whoInput').addEventListener('input', (e) => { localStorage.setItem('who', e.target.value.trim()); if (S) renderNav(route()); });
 
 // ---------- Carga y sincronización ----------
-let autoSynced = false;
+let autoSynced = false, sessionChecked = false;
 async function refresh(silent) {
   if (dlg.open) return; // no pisar lo que la persona está escribiendo
   try {
@@ -529,6 +641,11 @@ async function refresh(silent) {
     const changed = !S || j.rev !== S.rev;
     S = j; initSeen();
     if (changed) { render(); fillMyWs(); }
+    if (!sessionChecked && session() && !localMode) {
+      sessionChecked = true;
+      try { const m = await api('/api/auth', { type: 'me', token: session().token }); setSession(m); S = { ...S, leaders: m.leaders }; render(); }
+      catch (e) { if (/sesión/.test(e.message)) { setSession(null); render(); } }
+    }
     // Si se publicó una versión nueva de los datos, se aplica sola (una vez por visita).
     if (!autoSynced && window.SEED && S.seedVersion !== window.SEED.version) {
       autoSynced = true;
