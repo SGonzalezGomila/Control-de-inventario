@@ -114,6 +114,16 @@ const actions = {
     it.missing = n;
     addLog(state, { type: 'missing', by: str(p.by, 80), spaceIds: [s.id], text: `${s.name}: ${n ? `faltan ${n} de ${it.name}` : `${it.name} completo (no falta nada)`}` });
   },
+  renameSpace(state, p) {
+    const s = findSpace(state, p.spaceId);
+    const name = str(p.name, 80);
+    if (!name) throw new HttpError(400, 'Escribí el nombre del workshop.');
+    if (state.spaces.some((x) => x.id !== s.id && x.name.toLowerCase() === name.toLowerCase())) throw new HttpError(400, 'Ya hay un workshop con ese nombre.');
+    if (name === s.name) return;
+    const old = s.name;
+    s.name = name;
+    addLog(state, { type: 'space', by: str(p.by, 80), spaceIds: [s.id], text: `${old} ahora se llama ${name}` });
+  },
   setInfo(state, p) {
     const s = findSpace(state, p.spaceId);
     s.checkedAt = str(p.checkedAt, 40);

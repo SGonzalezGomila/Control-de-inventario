@@ -155,3 +155,6 @@ fieldset.field { display: grid; gap: 6px; }
 .sess button { background: none; border: 0; color: #9ec0ff; cursor: pointer; text-align: left; padding: 0; text-decoration: underline; }
 #session { padding: 0 8px; }
 #session .ghost-btn { width: 100%; }
+
+.rename { background: none; border: 0; margin-left: 10px; padding: 2px 8px; border-radius: 8px; color: var(--accent); cursor: pointer; font: 500 14px var(--font); vertical-align: middle; }
+.rename:hover { background: var(--accent-soft); }

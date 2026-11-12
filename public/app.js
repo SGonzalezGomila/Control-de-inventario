@@ -25,7 +25,7 @@ function pendingChecks(spaceId) { // confirmaciones que faltan en el horario vig
   if (!cur) return [];
   return checkable().filter((x) => (!spaceId || x.id === spaceId) && !confFor(x.id, cur.date, cur.slot));
 }
-const PROTECTED = ['confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
+const PROTECTED = ['renameSpace', 'confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
 const SK = 'session';
 const session = () => { try { const x = JSON.parse(localStorage.getItem(SK) || 'null'); return x && Number(x.token.split('.')[1]) > Date.now() ? x : null; } catch (e) { return null; } };
 const setSession = (x) => { if (x) localStorage.setItem(SK, JSON.stringify({ token: x.token, username: x.username, name: x.name, spaceIds: x.spaceIds })); else localStorage.removeItem(SK); };
@@ -158,7 +158,7 @@ function viewSpace(s, tab) {
   const news = unseen(s.id);
   const miss = s.items.reduce((a, i) => a + (i.missing || 0), 0);
   let h = `<div class="head"><div>
-      <h1>${esc(s.name)}</h1>
+      <h1>${esc(s.name)}${isLeader(s.id) ? `<button class="rename" data-act="rename" data-id="${s.id}" type="button" title="Cambiar el nombre">✎ cambiar nombre</button>` : ''}</h1>
       <div class="owner">Responsable: <b>${s.owner ? esc(s.owner) : 'sin asignar'}</b>${isLeader(s.id) ? `<button data-act="owner" data-id="${s.id}" type="button">cambiar</button>` : ''}
         · Último relevamiento: <b>${s.checkedAt ? esc(s.checkedAt) : 'sin fecha'}</b>${isLeader(s.id) ? `<button data-act="info" data-id="${s.id}" type="button">editar ficha</button>` : ''}</div>
       ${localMode ? '' : `<div class="owner">Líder del workshop: <b>${leadersOf(s.id).length ? esc(leadersOf(s.id).join(', ')) : 'sin usuario asignado'}</b>${session() && !isLeader(s.id) ? ' · <span class="zero">tu usuario no es líder de este workshop</span>' : ''}${!session() ? '<button data-act="login" type="button">Ingresar</button>' : ''}</div>`}
@@ -552,6 +552,14 @@ function openOwner(spaceId) {
     async (fd) => { await act({ type: 'setOwner', spaceId, owner: fd.get('owner') }); toast('Responsable actualizado.'); });
 }
 
+function openRename(spaceId) {
+  const s = space(spaceId);
+  openDialog(`<h2>Cambiar el nombre</h2>
+    <label class="field"><span>Nombre del workshop</span><input name="name" value="${esc(s.name)}" required maxlength="80" placeholder="Ej: WS 7 - Gen IA"></label>
+    <p class="hint">El inventario, los préstamos, los líderes y el historial quedan igual: solo cambia el nombre.</p>${foot('Guardar')}`,
+    async (fd) => { await act({ type: 'renameSpace', spaceId, name: fd.get('name') }); toast('Nombre actualizado.'); });
+}
+
 function openInfo(spaceId) {
   const s = space(spaceId);
   openDialog(`<h2>Ficha de ${esc(s.name)}</h2>
@@ -582,6 +590,7 @@ main.addEventListener('click', (e) => {
   if (d.act === 'addItem') openItem(d.id);
   if (d.act === 'editItem') openItem(d.id, d.item);
   if (d.act === 'owner') openOwner(d.id);
+  if (d.act === 'rename') openRename(d.id);
   if (d.act === 'confirm') {
     const go = () => (isLeader(d.id) ? openConfirm(d.id) : toast('Tu usuario no es líder de este workshop.', true));
     if (session() || localMode) go(); else openLogin(go);

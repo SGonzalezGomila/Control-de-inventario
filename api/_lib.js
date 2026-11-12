@@ -64,7 +64,7 @@ async function mutate(fn) {
 
 // ---- Usuarios de los líderes: usuario + contraseña, sesión firmada ----
 const SECRET = process.env.AUTH_SECRET || TOKEN || 'inventario-dev-secret';
-const PROTECTED = ['confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
+const PROTECTED = ['renameSpace', 'confirmSlot', 'setMissing', 'setInfo', 'setOwner', 'addItem', 'updateItem', 'deleteItem'];
 const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
 const sign = (data) => crypto.createHmac('sha256', SECRET).update(data).digest('hex');
 function makeToken(username) {
